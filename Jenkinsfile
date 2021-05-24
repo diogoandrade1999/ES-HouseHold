@@ -53,7 +53,7 @@ pipeline {
                 }
             }
         }
-        stage('Deployment') { 
+        stage('Deployment') {
             steps { 
                 withCredentials([usernamePassword(credentialsId: 'esp51_ssh_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 
@@ -63,9 +63,9 @@ pipeline {
                       remote.allowAnyHosts = true
                     }
 
-                    sshCommand remote: remote, command: "docker stop esp51-temperature"
-                    sshCommand remote: remote, command: "docker rm esp51-temperature"
-                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/temperature"
+                    //sshCommand remote: remote, command: "docker stop esp51-temperature"
+                    //sshCommand remote: remote, command: "docker rm esp51-temperature"
+                    //sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker create -p 8000:8080 --name esp51-temperature 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker start esp51-temperature"
