@@ -48,7 +48,7 @@ pipeline {
                             def temperature = docker.build("esp51/temperature", "./springboot/temperature")
 
                             // Push the container to the custom Registry 
-                            spring.push()
+                            temperature.push()
                     }
                 }
             }
