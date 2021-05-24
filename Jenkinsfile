@@ -63,7 +63,6 @@ pipeline {
                         remote.allowAnyHosts = true
                     }
                     echo "$remote.user"
-                    echo "$remote.password"
 
                     sshCommand remote: remote, command: "docker stop esp51-temperature"
                     sshCommand remote: remote, command: "docker rm esp51-temperature"
