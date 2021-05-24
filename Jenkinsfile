@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage ('Start') {
             steps {
-                dir('springboot/temperature'){  
+                dir('springboot/temperature'){
                     sh '''
                         echo "PATH = ${PATH}"
                         echo "M2_HOME = ${M2_HOME}"
@@ -22,13 +22,13 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir('springboot/temperature'){  
+                dir('springboot/temperature'){
                     sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
             }
             post {
                 success {
-                    dir('springboot/temperature'){  
+                    dir('springboot/temperature'){
                         junit 'target/surefire-reports/**/*.xml' 
                     }
                 }
@@ -36,7 +36,9 @@ pipeline {
         }
         stage ('Deploy') {
             steps{
-                sh 'mvn deploy -f springboot/temperature/pom.xml -s springboot/temperature/settings.xml' 
+                dir('springboot/temperature'){
+                    sh 'mvn deploy -f pom.xml -s settings.xml' 
+                }
             }
         }
         stage('Publish'){
@@ -68,7 +70,7 @@ pipeline {
                     sshCommand remote: remote, command: "docker create -p 8000:8080 --name esp51-temperature 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker start esp51-temperature"
                 }
-            }       
+            }
         }
     }
 }
