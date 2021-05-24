@@ -55,7 +55,7 @@ pipeline {
         }
         stage('Deployment') {
             steps { 
-                withCredentials([usernamePassword(credentialsId: 'esp51_ssh_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'esp50_ssh_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 
                     script {
                         remote.user = USERNAME
