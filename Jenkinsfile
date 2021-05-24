@@ -1,6 +1,6 @@
 def remote = [:]
 remote.host = "192.168.160.87"
-remote.name = "server-es"
+remote.name = "runtime"
 
 pipeline {
     agent any
@@ -44,10 +44,8 @@ pipeline {
         stage('Publish'){
             steps{
                 script{
-                    docker.withRegistry('http://192.168.160.48:5000') {
+                    docker.withRegistry("http://192.168.160.48:5000") {
                         def temperatureApp = docker.build("esp51/temperature", "./temperature")
-
-                        // Push the container to the custom Registry 
                         temperatureApp.push()
                     }
                 }
