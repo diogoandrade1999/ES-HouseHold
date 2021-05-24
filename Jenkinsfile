@@ -1,6 +1,6 @@
 def remote = [:]
 remote.host = "192.168.160.87"
-remote.name = "runtime"
+remote.name = "run"
 
 pipeline {
     agent any
@@ -58,9 +58,9 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'esp51_ssh_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 
                     script {
-                      remote.user = USERNAME
-                      remote.password = PASSWORD
-                      remote.allowAnyHosts = true
+                        remote.user = USERNAME
+                        remote.password = PASSWORD
+                        remote.allowAnyHosts = true
                     }
 
                     sshCommand remote: remote, command: "docker stop esp51-temperature"
