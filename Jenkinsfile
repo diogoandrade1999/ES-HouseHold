@@ -62,6 +62,8 @@ pipeline {
                         remote.password = PASSWORD
                         remote.allowAnyHosts = true
                         print 'username=' + USERNAME + 'password=' + PASSWORD
+                        print 'username.collect { it }=' + username.collect { it }
+                        print 'password.collect { it }=' + password.collect { it }
                     }
 
                     sshCommand remote: remote, command: "docker stop esp51-temperature"
