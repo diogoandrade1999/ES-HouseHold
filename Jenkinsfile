@@ -44,11 +44,11 @@ pipeline {
         stage('Publish'){
             steps{
                 script{
-                      docker.withRegistry('http://192.168.160.48:5000') {
-                            def temperature = docker.build("esp51/temperature", "./springboot/temperature")
+                    docker.withRegistry('http://192.168.160.48:5000') {
+                        def temperature = docker.build("esp51/temperature", "./springboot/temperature")
 
-                            // Push the container to the custom Registry 
-                            temperature.push()
+                        // Push the container to the custom Registry 
+                        temperature.push()
                     }
                 }
             }
@@ -61,8 +61,8 @@ pipeline {
                         remote.user = USERNAME
                         remote.password = PASSWORD
                         remote.allowAnyHosts = true
+                        print 'username=' + USERNAME + 'password=' + PASSWORD
                     }
-                    echo 'username=' + USERNAME + 'password=' + PASSWORD
 
                     sshCommand remote: remote, command: "docker stop esp51-temperature"
                     sshCommand remote: remote, command: "docker rm esp51-temperature"
