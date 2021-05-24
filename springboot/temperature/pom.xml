@@ -89,6 +89,19 @@
 		</dependency>
 	</dependencies>
 
+	<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>artifactory-releases</name>
+			<url>http://192.168.160.49:8081/artifactory/maven_es2021</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>artifactory-snapshots</name>
+			<url>http://192.168.160.49:8081/artifactory/maven_es2021</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
 			<plugin>
