@@ -5,12 +5,12 @@
     <servers>
         <server>
             <username>dev</username>
-            <password>${security.getEscapedEncryptedPassword()!"*** Insert encrypted password here ***"}</password>
+            <password>AP7eCe1tNgJf6c8xR5rkfSXJAVX</password>
             <id>central</id>
         </server>
         <server>
             <username>dev</username>
-            <password>${security.getEscapedEncryptedPassword()!"*** Insert encrypted password here ***"}</password>
+            <password>AP7eCe1tNgJf6c8xR5rkfSXJAVX</password>
             <id>snapshots</id>
         </server>
     </servers>
