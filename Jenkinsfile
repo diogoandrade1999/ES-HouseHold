@@ -54,17 +54,14 @@ pipeline {
         stage('Deployment') {
             steps { 
                 withCredentials([usernamePassword(credentialsId: 'esp51_ssh_credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    echo "I am here"
+
                     script {
                         remote.user = USERNAME
                         remote.password = PASSWORD
                         remote.allowAnyHosts = true
                     }
 
-                    echo "I am here again"
-                    echo "$remote.user"
-                    echo "$remote.host"
-                    
+                    sshCommand remote: remote, command: "ls"
                     sshCommand remote: remote, command: "docker stop esp51-temperature"
                     sshCommand remote: remote, command: "docker rm esp51-temperature"
                     sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/temperature"
