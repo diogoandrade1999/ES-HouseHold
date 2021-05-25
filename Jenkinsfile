@@ -1,5 +1,5 @@
 def remote = [:]
-remote.host = "192.168.160.87"
+remote.host = "192.168.160.18"
 remote.name = "runtime"
 
 pipeline {
