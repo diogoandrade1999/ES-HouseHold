@@ -1,6 +1,6 @@
 def remote = [:]
-remote.host = "192.168.160.18"
-remote.name = "runtime"
+remote.host = "192.168.160.87"
+remote.name = "playground"
 
 pipeline {
     agent any
