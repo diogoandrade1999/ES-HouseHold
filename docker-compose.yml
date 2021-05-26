@@ -1,0 +1,87 @@
+version: "3"
+services:
+    simulator-app:
+        build:
+            context: ./simulator
+            dockerfile: Dockerfile
+        ports:
+            - "51010:51010"
+        expose:
+            - 51010
+        depends_on:
+            - zookeeper
+            - kafka
+            - kafdrop
+
+    temperature-app:
+        build:
+            context: ./temperature
+            dockerfile: Dockerfile
+        ports:
+            - "51020:51020"
+        expose:
+            - 51020
+        depends_on:
+            - zookeeper
+            - kafka
+            - kafdrop
+            - postgres
+        links:
+            - postgres
+
+    zookeeper:
+        image: confluentinc/cp-zookeeper:latest
+        networks:
+            - broker-kafka
+        environment:
+            ZOOKEEPER_CLIENT_PORT: 2181
+            ZOOKEEPER_TICK_TIME: 2000
+
+    kafka:
+        image: confluentinc/cp-kafka:latest
+        networks:
+            - broker-kafka
+        depends_on:
+            - zookeeper
+        ports:
+            - 9092:9092
+        environment:
+            KAFKA_BROKER_ID: 1
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+    kafdrop:
+        image: obsidiandynamics/kafdrop:latest
+        networks:
+            - broker-kafka
+        depends_on:
+            - kafka
+        ports:
+            - 19000:9000
+        environment:
+            KAFKA_BROKERCONNECT: kafka:29092
+
+    postgres:
+        image: postgres:latest
+        network_mode: bridge
+        container_name: postgres
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        expose:
+            - 5432
+        environment:
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_USER=admin
+            - POSTGRES_DB=postgres
+
+networks:
+    broker-kafka:
+        driver: bridge
+
+volumes:
+    postgres-data:
