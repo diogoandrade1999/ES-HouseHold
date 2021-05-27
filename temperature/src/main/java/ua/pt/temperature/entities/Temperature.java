@@ -1,4 +1,4 @@
-package ua.pt.temperature.domains;
+package ua.pt.temperature.entities;
 
 import java.util.Date;
 

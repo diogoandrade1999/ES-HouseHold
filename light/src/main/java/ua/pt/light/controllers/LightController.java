@@ -1,4 +1,4 @@
-package ua.pt.temperature.controllers;
+package ua.pt.light.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,33 +7,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.pt.temperature.entities.Temperature;
-import ua.pt.temperature.services.TemperatureService;
+import ua.pt.light.entities.Light;
+import ua.pt.light.services.LightService;
 
 @RestController
-@RequestMapping("/temperatures")
-public class TemperatureController {
+@RequestMapping("/lights")
+public class LightController {
 
     @Autowired
-    private TemperatureService temperatureService;
+    private LightService lightService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Temperature> all() {
-        return this.temperatureService.listAllTemperatures();
+    public Iterable<Light> all() {
+        return this.lightService.listAllLights();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Temperature one(@PathVariable Long id) {
-        return this.temperatureService.getTemperatureById(id);
+    public Light one(@PathVariable Long id) {
+        return this.lightService.getLightById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Temperature save(@RequestBody Temperature temperature) {
-        return this.temperatureService.saveTemperature(temperature);
+    public Light save(@RequestBody Light light) {
+        return this.lightService.saveLight(light);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
-        this.temperatureService.deleteTemperatureById(id);
+        this.lightService.deleteLightById(id);
     }
 }

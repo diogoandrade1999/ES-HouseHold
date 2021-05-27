@@ -3,7 +3,7 @@ package ua.pt.temperature.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.pt.temperature.domains.Temperature;
+import ua.pt.temperature.entities.Temperature;
 import ua.pt.temperature.repositories.TemperatureRepository;
 
 @Service
@@ -32,4 +32,8 @@ public class TemperatureServiceImpl implements TemperatureService {
         return this.temperatureRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public void deleteTemperatureById(long id) {
+        this.temperatureRepository.deleteById(id);
+    }
 }

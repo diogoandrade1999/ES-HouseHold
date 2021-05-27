@@ -24,6 +24,12 @@ pipeline {
                         echo "M2_HOME = ${M2_HOME}"
                     '''
                 }
+                dir('light'){
+                    sh '''
+                        echo "PATH = ${PATH}"
+                        echo "M2_HOME = ${M2_HOME}"
+                    '''
+                }
             }
         }
         stage('Build') {
@@ -32,6 +38,9 @@ pipeline {
                     sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
                 dir('temperature'){
+                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                }
+                dir('light'){
                     sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
             }
@@ -43,6 +52,9 @@ pipeline {
                     dir('temperature'){
                         junit 'target/surefire-reports/**/*.xml' 
                     }
+                    dir('light'){
+                        junit 'target/surefire-reports/**/*.xml' 
+                    }
                 }
             }
         }
@@ -50,6 +62,7 @@ pipeline {
             steps{
                 sh 'mvn deploy -f ./simulator/pom.xml -s settings.xml' 
                 sh 'mvn deploy -f ./temperature/pom.xml -s settings.xml' 
+                sh 'mvn deploy -f ./light/pom.xml -s settings.xml' 
             }
         }
         stage('Publish'){
@@ -61,6 +74,9 @@ pipeline {
 
                         def temperatureApp = docker.build("esp51/temperature", "./temperature")
                         temperatureApp.push()
+
+                        def lightApp = docker.build("esp51/light", "./light")
+                        lightApp.push()
                     }
                 }
             }
@@ -88,6 +104,13 @@ pipeline {
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker create -p 51020:51020 --name esp51-temperature 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker start esp51-temperature"
+
+                    sshCommand remote: remote, command: "docker stop esp51-light"
+                    sshCommand remote: remote, command: "docker rm esp51-light"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/light"
+                    sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/light"
+                    sshCommand remote: remote, command: "docker create -p 51030:51030 --name esp51-light 192.168.160.48:5000/esp51/light"
+                    sshCommand remote: remote, command: "docker start esp51-light"
                 }
             }
         }

@@ -1,6 +1,6 @@
 package ua.pt.temperature.services;
 
-import ua.pt.temperature.domains.Temperature;
+import ua.pt.temperature.entities.Temperature;
 
 public interface TemperatureService {
 
@@ -9,6 +9,8 @@ public interface TemperatureService {
     Temperature getTemperatureById(long id);
 
     Temperature saveTemperature(Temperature temperature);
+
+    void deleteTemperatureById(long id);
 
     long count();
 }

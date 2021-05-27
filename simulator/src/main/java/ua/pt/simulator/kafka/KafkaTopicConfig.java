@@ -24,7 +24,12 @@ public class KafkaTopicConfig {
     }
 
     @Bean
-    public NewTopic toppicTemperature() {
-        return new NewTopic("temperature", 1, (short) 1);
+    public NewTopic topicTemperature() {
+        return new NewTopic("esp51-temperature", 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic topicLight() {
+        return new NewTopic("esp51-light", 1, (short) 1);
     }
 }
