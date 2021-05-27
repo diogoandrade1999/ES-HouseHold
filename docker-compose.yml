@@ -48,6 +48,23 @@ services:
         links:
             - postgres
 
+    humidity-app:
+        container_name: humidity-app
+        build:
+            context: ./humidity
+            dockerfile: Dockerfile
+        ports:
+            - "51040:51040"
+        expose:
+            - 51040
+        depends_on:
+            - zookeeper
+            - kafka
+            - kafdrop
+            - postgres
+        links:
+            - postgres
+
     zookeeper:
         image: confluentinc/cp-zookeeper:latest
         container_name: zookeeper

@@ -11,7 +11,7 @@ import ua.pt.temperature.entities.Temperature;
 import ua.pt.temperature.services.TemperatureService;
 
 @RestController
-@RequestMapping("/temperatures")
+@RequestMapping("/temperature")
 public class TemperatureController {
 
     @Autowired

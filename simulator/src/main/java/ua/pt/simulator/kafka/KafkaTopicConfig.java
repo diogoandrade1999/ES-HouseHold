@@ -32,4 +32,10 @@ public class KafkaTopicConfig {
     public NewTopic topicLight() {
         return new NewTopic("esp51-light", 1, (short) 1);
     }
+
+    @Bean
+    public NewTopic topicHumidity() {
+        return new NewTopic("esp51-humidity", 1, (short) 1);
+    }
+
 }

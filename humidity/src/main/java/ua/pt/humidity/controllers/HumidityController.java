@@ -1,4 +1,4 @@
-package ua.pt.light.controllers;
+package ua.pt.humidity.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,33 +7,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.pt.light.entities.Light;
-import ua.pt.light.services.LightService;
+import ua.pt.humidity.entities.Humidity;
+import ua.pt.humidity.services.HumidityService;
 
 @RestController
-@RequestMapping("/light")
-public class LightController {
+@RequestMapping("/humidity")
+public class HumidityController {
 
     @Autowired
-    private LightService lightService;
+    private HumidityService humidityService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Light> all() {
-        return this.lightService.listAllLights();
+    public Iterable<Humidity> all() {
+        return this.humidityService.listAllHumiditys();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Light one(@PathVariable Long id) {
-        return this.lightService.getLightById(id);
+    public Humidity one(@PathVariable Long id) {
+        return this.humidityService.getHumidityById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Light save(@RequestBody Light light) {
-        return this.lightService.saveLight(light);
+    public Humidity save(@RequestBody Humidity humidity) {
+        return this.humidityService.saveHumidity(humidity);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
-        this.lightService.deleteLightById(id);
+        this.humidityService.deleteHumidityById(id);
     }
 }
