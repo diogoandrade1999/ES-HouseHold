@@ -75,16 +75,16 @@ pipeline {
                         remote.allowAnyHosts = true
                     }
 
-                    //sshCommand remote: remote, command: "docker stop esp51-simulator"
-                    //sshCommand remote: remote, command: "docker rm esp51-simulator"
-                    //sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/simulator"
+                    sshCommand remote: remote, command: "docker stop esp51-simulator"
+                    sshCommand remote: remote, command: "docker rm esp51-simulator"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/simulator"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/simulator"
                     sshCommand remote: remote, command: "docker create -p 51010:51010 --name esp51-simulator 192.168.160.48:5000/esp51/simulator"
                     sshCommand remote: remote, command: "docker start esp51-simulator"
 
-                    //sshCommand remote: remote, command: "docker stop esp51-temperature"
-                    //sshCommand remote: remote, command: "docker rm esp51-temperature"
-                    //sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/temperature"
+                    sshCommand remote: remote, command: "docker stop esp51-temperature"
+                    sshCommand remote: remote, command: "docker rm esp51-temperature"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker create -p 51020:51020 --name esp51-temperature 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker start esp51-temperature"
