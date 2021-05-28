@@ -1,6 +1,7 @@
 version: "3"
 services:
     simulator-app:
+        container_name: simulator-app
         build:
             context: ./simulator
             dockerfile: Dockerfile
@@ -14,6 +15,7 @@ services:
             - kafdrop
 
     temperature-app:
+        container_name: temperature-app
         build:
             context: ./temperature
             dockerfile: Dockerfile
@@ -29,8 +31,43 @@ services:
         links:
             - postgres
 
+    light-app:
+        container_name: light-app
+        build:
+            context: ./light
+            dockerfile: Dockerfile
+        ports:
+            - "51030:51030"
+        expose:
+            - 51030
+        depends_on:
+            - zookeeper
+            - kafka
+            - kafdrop
+            - postgres
+        links:
+            - postgres
+
+    humidity-app:
+        container_name: humidity-app
+        build:
+            context: ./humidity
+            dockerfile: Dockerfile
+        ports:
+            - "51040:51040"
+        expose:
+            - 51040
+        depends_on:
+            - zookeeper
+            - kafka
+            - kafdrop
+            - postgres
+        links:
+            - postgres
+
     zookeeper:
         image: confluentinc/cp-zookeeper:latest
+        container_name: zookeeper
         networks:
             - broker-kafka
         environment:
@@ -39,6 +76,7 @@ services:
 
     kafka:
         image: confluentinc/cp-kafka:latest
+        container_name: kafka
         networks:
             - broker-kafka
         depends_on:
@@ -55,6 +93,7 @@ services:
 
     kafdrop:
         image: obsidiandynamics/kafdrop:latest
+        container_name: kafdrop
         networks:
             - broker-kafka
         depends_on:

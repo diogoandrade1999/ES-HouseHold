@@ -1,4 +1,4 @@
-package ua.pt.temperature.controllers;
+package ua.pt.humidity.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,33 +7,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.pt.temperature.entities.Temperature;
-import ua.pt.temperature.services.TemperatureService;
+import ua.pt.humidity.entities.Humidity;
+import ua.pt.humidity.services.HumidityService;
 
 @RestController
-@RequestMapping("/temperature")
-public class TemperatureController {
+@RequestMapping("/humidity")
+public class HumidityController {
 
     @Autowired
-    private TemperatureService temperatureService;
+    private HumidityService humidityService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Temperature> all() {
-        return this.temperatureService.listAllTemperatures();
+    public Iterable<Humidity> all() {
+        return this.humidityService.listAllHumiditys();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Temperature one(@PathVariable Long id) {
-        return this.temperatureService.getTemperatureById(id);
+    public Humidity one(@PathVariable Long id) {
+        return this.humidityService.getHumidityById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Temperature save(@RequestBody Temperature temperature) {
-        return this.temperatureService.saveTemperature(temperature);
+    public Humidity save(@RequestBody Humidity humidity) {
+        return this.humidityService.saveHumidity(humidity);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
-        this.temperatureService.deleteTemperatureById(id);
+        this.humidityService.deleteHumidityById(id);
     }
 }

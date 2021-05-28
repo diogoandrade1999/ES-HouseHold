@@ -1,33 +1,26 @@
-package ua.pt.temperature.domains;
+package ua.pt.simulator.domains;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class Humidity {
 
-@Entity
-public class Temperature {
+    private long humidityId;
 
-    @Id
-    @GeneratedValue
-    private long temperatureId;
-
-    private double temperature;
+    private double humidity;
     private Date date;
     private long houseId;
     private long roomId;
 
-    public long getTemperatureId() {
-        return this.temperatureId;
+    public long getHumidityId() {
+        return this.humidityId;
     }
 
-    public double getTemperature() {
-        return this.temperature;
+    public double getHumidity() {
+        return this.humidity;
     }
 
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
+    public void setHumidity(double humidity) {
+        this.humidity = humidity;
     }
 
     public Date getDate() {

@@ -1,4 +1,4 @@
-package ua.pt.temperature.kafka;
+package ua.pt.humidity.kafka;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import ua.pt.temperature.entities.Temperature;
+import ua.pt.humidity.entities.Humidity;
 
 @EnableKafka
 @Configuration
@@ -29,18 +29,18 @@ public class KafkaConsumerConfig {
     private String groupId;
 
     @Bean
-    public ConsumerFactory<String, Temperature> consumerFactory() {
+    public ConsumerFactory<String, Humidity> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         ObjectMapper om = new ObjectMapper();
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(),
-                new JsonDeserializer<Temperature>(Temperature.class, om, false));
+                new JsonDeserializer<Humidity>(Humidity.class, om, false));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Temperature> temperatureKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Temperature> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, Humidity> humidityKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Humidity> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }

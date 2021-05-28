@@ -17,7 +17,7 @@ public class TemperatureScheduler {
     private KafkaTemplate<String, Temperature> kafkaTemplate;
 
     public void sendTemperature(Temperature temperature) {
-        this.kafkaTemplate.send("temperature", temperature);
+        this.kafkaTemplate.send("esp51-temperature", temperature);
     }
 
     @Scheduled(fixedRate = 5000)
