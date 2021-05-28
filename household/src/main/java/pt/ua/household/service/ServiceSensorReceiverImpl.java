@@ -42,7 +42,7 @@ public class ServiceSensorReceiverImpl {
         // Convert json message to Temperature object
         ObjectMapper mapper = new ObjectMapper();
         Temperature temp = mapper.readValue(message, Temperature.class);
-        // logger.info("Temperature Received -> " + temp.getTemperature());
+        logger.info("Temperature Received -> " + temp.getTemperature());
 
         if (temp.getTemperature() >= 20) {
             sendCommand("Turn on AC!");

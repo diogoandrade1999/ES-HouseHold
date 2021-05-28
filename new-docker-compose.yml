@@ -13,6 +13,24 @@ services:
             - zookeeper
             - kafka
             - kafdrop
+
+    temperature-app:
+        container_name: temperature-app
+        build:
+            context: ./temperature
+            dockerfile: Dockerfile
+        ports:
+            - "51020:51020"
+        expose:
+            - 51020
+        depends_on:
+            - zookeeper
+            - kafka
+            - kafdrop
+            - postgres
+        links:
+            - postgres
+
     zookeeper:
         image: confluentinc/cp-zookeeper:latest
         container_name: zookeeper
@@ -51,7 +69,6 @@ services:
 
     postgres:
         image: postgres:latest
-        network_mode: bridge
         container_name: postgres
         volumes:
             - postgres-data:/var/lib/postgresql/data
