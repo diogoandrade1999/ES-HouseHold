@@ -27,6 +27,7 @@ public class LightScheduler {
         light.setRoomId(1);
         light.setLight(new Random().nextDouble() * 25);
         light.setDate(new Date());
+        System.out.println(light);
         this.sendLight(light);
     }
 }

@@ -27,6 +27,7 @@ public class HumidityScheduler {
         humidity.setRoomId(1);
         humidity.setHumidity(new Random().nextDouble() * 25);
         humidity.setDate(new Date());
+        System.out.println(humidity);
         this.sendHumidity(humidity);
     }
 }

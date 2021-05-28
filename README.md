@@ -9,3 +9,9 @@
 ```bash
 $ mvn clean package -DskipTests
 ```
+
+### DOCKER COMPOSE
+
+```bash
+$ sudo docker-compose up -d --build
+```

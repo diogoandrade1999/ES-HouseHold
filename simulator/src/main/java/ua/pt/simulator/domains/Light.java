@@ -47,4 +47,15 @@ public class Light {
         this.roomId = roomId;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " lightId='" + getLightId() + "'" +
+            ", light='" + getLight() + "'" +
+            ", date='" + getDate() + "'" +
+            ", houseId='" + getHouseId() + "'" +
+            ", roomId='" + getRoomId() + "'" +
+            "}";
+    }
+
 }

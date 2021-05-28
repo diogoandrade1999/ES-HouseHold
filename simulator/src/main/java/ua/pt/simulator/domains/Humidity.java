@@ -47,4 +47,15 @@ public class Humidity {
         this.roomId = roomId;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " humidityId='" + getHumidityId() + "'" +
+            ", humidity='" + getHumidity() + "'" +
+            ", date='" + getDate() + "'" +
+            ", houseId='" + getHouseId() + "'" +
+            ", roomId='" + getRoomId() + "'" +
+            "}";
+    }
+
 }
