@@ -1,0 +1,14 @@
+mvn clean package -DskipTests
+sudo docker-compose up
+
+After changing application code
+
+mvn clean package -DskipTests
+sudo docker-compose up --build
+
+Articles For kafka:
+https://medium.com/trainingcenter/apache-kafka-codifica%C3%A7%C3%A3o-na-pratica-9c6a4142a08f
+https://medium.com/azure-na-pratica/apache-kafka-kafdrop-docker-compose-montando-rapidamente-um-ambiente-para-testes-606cc76aa66
+https://gist.github.com/rmoff/fb7c39cc189fc6082a5fbd390ec92b3d
+https://stackoverflow.com/questions/52438822/docker-kafka-w-python-consumer/52440056#52440056
+https://rmoff.net/2018/08/02/kafka-listeners-explained/
