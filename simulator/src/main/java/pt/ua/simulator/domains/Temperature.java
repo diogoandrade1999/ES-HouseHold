@@ -4,16 +4,10 @@ import java.util.Date;
 
 public class Temperature {
 
-    private long temperatureId;
-
     private double temperature;
     private Date date;
     private long houseId;
     private long roomId;
-
-    public long getTemperatureId() {
-        return this.temperatureId;
-    }
 
     public double getTemperature() {
         return this.temperature;
@@ -49,13 +43,8 @@ public class Temperature {
 
     @Override
     public String toString() {
-        return "{" +
-            " temperatureId='" + getTemperatureId() + "'" +
-            ", temperature='" + getTemperature() + "'" +
-            ", date='" + getDate() + "'" +
-            ", houseId='" + getHouseId() + "'" +
-            ", roomId='" + getRoomId() + "'" +
-            "}";
+        return "{" + "temperature='" + getTemperature() + "'" + ", date='" + getDate() + "'" + ", houseId='"
+                + getHouseId() + "'" + ", roomId='" + getRoomId() + "'" + "}";
     }
 
 }

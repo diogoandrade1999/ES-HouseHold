@@ -24,11 +24,19 @@
         <script>
             var timeChart = new Chart(
                 document.getElementById("timeChart"),
-                line_chart([], [])
+                line_chart([], [], "Temperature")
             );
             setInterval(function () {
+                let date = new Date();
+                let endDate = parseInt((date.getTime() / 1000).toFixed(0));
+                date.setDate(date.getDate() - 1);
+                let startDate = parseInt((date.getTime() / 1000).toFixed(0));
                 $.ajax({
-                    url: "http://localhost:51020/temperature",
+                    url:
+                        "http://localhost:51020/temperature/" +
+                        startDate +
+                        "/" +
+                        endDate,
                     method: "GET",
                     dataType: "json",
                 })
@@ -36,13 +44,15 @@
                         var labelTime = [];
                         var dataTemperature = [];
                         res.slice(-50).forEach((element) => {
-                            let date = new Date(element.date);
+                            let dateElement = new Date(element.date);
                             labelTime.push(
-                                date.getHours() +
+                                addZero(dateElement.getHours()).toString() +
                                     ":" +
-                                    date.getMinutes() +
+                                    addZero(
+                                        dateElement.getMinutes()
+                                    ).toString() +
                                     ":" +
-                                    date.getSeconds()
+                                    addZero(dateElement.getSeconds()).toString()
                             );
                             dataTemperature.push(element.temperature);
                         });

@@ -1,16 +1,17 @@
 package ua.pt.temperature.services;
 
+import java.util.Date;
+
 import ua.pt.temperature.entities.Temperature;
 
 public interface TemperatureService {
 
-    Iterable<Temperature> listAllTemperatures();
-
-    Temperature getTemperatureById(long id);
-
     Temperature saveTemperature(Temperature temperature);
 
-    void deleteTemperatureById(long id);
+    Iterable<Temperature> getTemperatureByDate(Date startDate, Date endDate);
 
-    long count();
+    Iterable<Temperature> getTemperatureByDateAndHouse(Date startDate, Date endDate, long houseId);
+
+    Iterable<Temperature> getTemperatureByDateAndHouseAndRoom(Date startDate, Date endDate, long houseId, long roomId);
+
 }

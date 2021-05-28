@@ -1,5 +1,7 @@
 package ua.pt.temperature.controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,14 +19,23 @@ public class TemperatureController {
     @Autowired
     private TemperatureService temperatureService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public Iterable<Temperature> all() {
-        return this.temperatureService.listAllTemperatures();
+    @RequestMapping(value = "/{startDate}/{endDate}", method = RequestMethod.GET)
+    public Iterable<Temperature> betweenDates(@PathVariable long startDate, @PathVariable long endDate) {
+        return this.temperatureService.getTemperatureByDate(new Date(startDate * 1000L), new Date(endDate * 1000L));
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Temperature one(@PathVariable Long id) {
-        return this.temperatureService.getTemperatureById(id);
+    @RequestMapping(value = "/{startDate}/{endDate}/{houseId}", method = RequestMethod.GET)
+    public Iterable<Temperature> betweenDatesAndHouse(@PathVariable long startDate, @PathVariable long endDate,
+            @PathVariable long houseId) {
+        return this.temperatureService.getTemperatureByDateAndHouse(new Date(startDate * 1000L),
+                new Date(endDate * 1000L), houseId);
+    }
+
+    @RequestMapping(value = "/{startDate}/{endDate}/{houseId}/{roomId}", method = RequestMethod.GET)
+    public Iterable<Temperature> betweenDatesAndHouseAndRoom(@PathVariable long startDate, @PathVariable long endDate,
+            @PathVariable long houseId, @PathVariable long roomId) {
+        return this.temperatureService.getTemperatureByDateAndHouseAndRoom(new Date(startDate * 1000L),
+                new Date(endDate * 1000L), houseId, roomId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -32,8 +43,4 @@ public class TemperatureController {
         return this.temperatureService.saveTemperature(temperature);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id) {
-        this.temperatureService.deleteTemperatureById(id);
-    }
 }

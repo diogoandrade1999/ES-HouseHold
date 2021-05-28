@@ -3,24 +3,17 @@ package ua.pt.temperature.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Temperature {
 
     @Id
-    @GeneratedValue
-    private long temperatureId;
+    private Date date;
 
     private double temperature;
-    private Date date;
     private long houseId;
     private long roomId;
-
-    public long getTemperatureId() {
-        return this.temperatureId;
-    }
 
     public double getTemperature() {
         return this.temperature;
