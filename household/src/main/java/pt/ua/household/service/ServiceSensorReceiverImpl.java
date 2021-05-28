@@ -21,8 +21,8 @@ import java.util.concurrent.CountDownLatch;
 @EnableKafka
 public class ServiceSensorReceiverImpl {
 
-    private static final String TOPIC_TEMPERATURE = "esp51_temperature";
-    private static final String TOPIC_COMMANDS = "esp51_commands";
+    private static final String TOPIC_TEMPERATURE = "esp51-temperature";
+    private static final String TOPIC_COMMANDS = "esp51-commands";
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;

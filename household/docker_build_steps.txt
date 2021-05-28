@@ -1,0 +1,10 @@
+mvn clean package -DskipTests
+sudo docker build ./ -t household
+sudo docker run --network=host household
+
+We have to run network in host mode, since kafka is available in localhost:9092, but
+since we are dockerizing this app, it was using the docker ip and not the docker host ip.
+To use the docker host ip it is necessary to add --network=host.
+THe simulator must have the bootstrap address set to spring.kafka.bootstrap-servers=kafka:29092 if
+it is running in the same docker network (basically in the same docker compose), otherwise it is necessary
+to run also as --network=host ( i guess, not tested).
