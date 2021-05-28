@@ -1,13 +1,14 @@
-const line_chart = (labelTime, dataTemperature) => {
-    const labels = labelTime;
+const line_chart = (labelTime, labelData, labelName) => {
     const data = {
-        labels: labels,
+        labels: labelTime,
         datasets: [
             {
-                label: "Temperature",
+                label: labelName,
                 backgroundColor: "rgb(255, 99, 132)",
                 borderColor: "rgb(255, 99, 132)",
-                data: dataTemperature,
+                borderWidth: 1,
+                radius: 0,
+                data: labelData,
             },
         ],
     };
