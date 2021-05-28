@@ -15,3 +15,9 @@ $ mvn clean package -DskipTests
 ```bash
 $ sudo docker-compose up -d --build
 ```
+
+##### ONLY SERVICES
+
+```bash
+$ sudo docker-compose -f docker-compose-services.yml up -d --build
+```

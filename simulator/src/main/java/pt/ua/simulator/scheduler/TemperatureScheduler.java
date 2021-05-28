@@ -1,4 +1,4 @@
-package ua.pt.simulator.scheduler;
+package pt.ua.simulator.scheduler;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,7 +9,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import ua.pt.simulator.domains.Temperature;
+import pt.ua.simulator.domains.Temperature;
 
 @Component
 public class TemperatureScheduler {

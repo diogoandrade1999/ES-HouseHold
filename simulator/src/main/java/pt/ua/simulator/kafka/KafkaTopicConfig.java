@@ -1,4 +1,4 @@
-package ua.pt.simulator.kafka;
+package pt.ua.simulator.kafka;
 
 import java.util.HashMap;
 import java.util.Map;

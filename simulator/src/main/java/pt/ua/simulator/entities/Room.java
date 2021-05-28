@@ -1,4 +1,4 @@
-package ua.pt.simulator.entities;
+package pt.ua.simulator.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

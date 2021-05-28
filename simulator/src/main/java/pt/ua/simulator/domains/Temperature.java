@@ -1,4 +1,4 @@
-package ua.pt.simulator.domains;
+package pt.ua.simulator.domains;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package ua.pt.simulator.scheduler;
+package pt.ua.simulator.scheduler;
 
 import java.util.Date;
 import java.util.Random;
@@ -8,7 +8,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import ua.pt.simulator.domains.Light;
+import pt.ua.simulator.domains.Light;
 
 @Component
 public class LightScheduler {

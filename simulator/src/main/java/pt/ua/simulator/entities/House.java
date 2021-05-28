@@ -1,4 +1,4 @@
-package ua.pt.simulator.entities;
+package pt.ua.simulator.entities;
 
 import java.util.Set;
 
@@ -29,6 +29,10 @@ public class House {
 
     public void setRooms(Set<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public void addRoom(Room room) {
+        this.rooms.add(room);
     }
 
     @Override

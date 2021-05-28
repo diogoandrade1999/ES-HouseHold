@@ -9,7 +9,7 @@
 		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>ua.pt</groupId>
+	<groupId>pt.ua</groupId>
 	<artifactId>simulator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>simulator</name>

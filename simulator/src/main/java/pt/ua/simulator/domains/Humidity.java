@@ -1,4 +1,4 @@
-package ua.pt.simulator.domains;
+package pt.ua.simulator.domains;
 
 import java.util.Date;
 
@@ -49,13 +49,8 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "{" +
-            " humidityId='" + getHumidityId() + "'" +
-            ", humidity='" + getHumidity() + "'" +
-            ", date='" + getDate() + "'" +
-            ", houseId='" + getHouseId() + "'" +
-            ", roomId='" + getRoomId() + "'" +
-            "}";
+        return "{" + " humidityId='" + getHumidityId() + "'" + ", humidity='" + getHumidity() + "'" + ", date='"
+                + getDate() + "'" + ", houseId='" + getHouseId() + "'" + ", roomId='" + getRoomId() + "'" + "}";
     }
 
 }
