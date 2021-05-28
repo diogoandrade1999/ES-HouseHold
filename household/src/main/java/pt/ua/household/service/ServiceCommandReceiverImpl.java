@@ -33,9 +33,8 @@ public class ServiceCommandReceiverImpl {
 
     @KafkaListener(topics = TOPIC_COMMANDS, groupId = "1")
     public void consumeCommand(String command) throws IOException {
-        logger.info(String.format("Command to perform -> %s", command));
+        // logger.info(String.format("Command to perform -> %s", command));
 
     }
-
 
 }

@@ -11,6 +11,49 @@
         </header>
         <main class="container">
             <p class="h1 text-center mt-5">Dashboard</p>
+            <div class="bg-white">
+                <canvas id="timeChart"></canvas>
+            </div>
         </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script
+            src="../static/js/chart_line.js"
+            th:src="@{/js/chart_line.js}"
+        ></script>
+        <script>
+            var timeChart = new Chart(
+                document.getElementById("timeChart"),
+                line_chart([], [])
+            );
+            setInterval(function () {
+                $.ajax({
+                    url: "http://localhost:51020/temperature",
+                    method: "GET",
+                    dataType: "json",
+                })
+                    .done((res) => {
+                        var labelTime = [];
+                        var dataTemperature = [];
+                        res.slice(-50).forEach((element) => {
+                            let date = new Date(element.date);
+                            labelTime.push(
+                                date.getHours() +
+                                    ":" +
+                                    date.getMinutes() +
+                                    ":" +
+                                    date.getSeconds()
+                            );
+                            dataTemperature.push(element.temperature);
+                        });
+                        timeChart.data.labels = labelTime;
+                        timeChart.data.datasets[0].data = dataTemperature;
+                        timeChart.update();
+                    })
+                    .fail((err) => {
+                        console.log("Fail request to Temperature API!");
+                    });
+            }, 5000);
+        </script>
     </body>
 </html>

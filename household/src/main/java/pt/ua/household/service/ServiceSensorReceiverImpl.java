@@ -37,20 +37,21 @@ public class ServiceSensorReceiverImpl {
 
     @KafkaListener(topics = TOPIC_TEMPERATURE, groupId = "1")
     public void consumeTemperature(String message) throws IOException {
-        logger.info(String.format("Consumed message -> %s", message));
+        // logger.info(String.format("Consumed message -> %s", message));
 
         // Convert json message to Temperature object
         ObjectMapper mapper = new ObjectMapper();
-        Temperature temp =mapper.readValue(message, Temperature.class);
-        logger.info("Temperature Received -> " + temp.getTemperature());
+        Temperature temp = mapper.readValue(message, Temperature.class);
+        // logger.info("Temperature Received -> " + temp.getTemperature());
 
-        if(temp.getTemperature() >= 20){
+        if (temp.getTemperature() >= 20) {
             sendCommand("Turn on AC!");
         }
 
     }
+
     public void sendCommand(String message) {
-        logger.info("Sending message " + message + " to topic "+ TOPIC_COMMANDS);
+        // logger.info("Sending message " + message + " to topic "+ TOPIC_COMMANDS);
         kafkaTemplate.send(TOPIC_COMMANDS, message);
 
     }
