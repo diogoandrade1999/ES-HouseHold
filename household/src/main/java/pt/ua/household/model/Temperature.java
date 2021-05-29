@@ -6,8 +6,7 @@ import java.util.Date;
 
 public class Temperature {
 
-    @JsonProperty("temperatureId")
-    private long temperatureId;
+
     @JsonProperty("temperature")
     private double temperature;
     @JsonProperty("date")
@@ -16,10 +15,6 @@ public class Temperature {
     private long houseId;
     @JsonProperty("roomId")
     private long roomId;
-
-    public long getTemperatureId() {
-        return this.temperatureId;
-    }
 
     public double getTemperature() {
         return this.temperature;

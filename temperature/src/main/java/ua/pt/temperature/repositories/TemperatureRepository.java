@@ -16,4 +16,5 @@ public interface TemperatureRepository extends JpaRepository<Temperature, Date> 
 
     Iterable<Temperature> findByDateBetweenAndHouseIdAndRoomId(Date startDate, Date endDate, long houseId, long roomId);
 
+    Temperature findFirstByHouseIdAndRoomIdOrderByDateDesc(long houseId, long roomId);
 }

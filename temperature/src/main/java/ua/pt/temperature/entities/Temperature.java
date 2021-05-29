@@ -47,4 +47,10 @@ public class Temperature {
         this.roomId = roomId;
     }
 
+    @Override
+    public String toString() {
+        return "{" + "temperature='" + getTemperature() + "'" + ", date='" + getDate() + "'" + ", houseId='"
+                + getHouseId() + "'" + ", roomId='" + getRoomId() + "'" + "}";
+    }
+
 }

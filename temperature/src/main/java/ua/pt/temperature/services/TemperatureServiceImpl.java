@@ -35,4 +35,9 @@ public class TemperatureServiceImpl implements TemperatureService {
         return this.temperatureRepository.findByDateBetweenAndHouseIdAndRoomId(startDate, endDate, houseId, roomId);
     }
 
+    @Override
+    public Temperature getRecentTemperatures(long houseId, long roomId){
+        return temperatureRepository.findFirstByHouseIdAndRoomIdOrderByDateDesc(houseId, roomId);
+    }
+
 }
