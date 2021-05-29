@@ -9,7 +9,7 @@ public class RetrofitClientInstance {
     private static final String BASE_URL = "http://localhost:51020/temperature/";
 
     private RetrofitClientInstance(){
-
+        
     }
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
