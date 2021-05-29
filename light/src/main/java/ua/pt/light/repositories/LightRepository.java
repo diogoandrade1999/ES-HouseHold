@@ -7,4 +7,6 @@ import ua.pt.light.entities.Light;
 
 @Repository
 public interface LightRepository extends JpaRepository<Light, Long> {
+
+    Light findFirstByHouseIdAndRoomIdOrderByDateDesc(long houseId, long roomId);
 }

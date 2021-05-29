@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import pt.ua.household.model.Humidity;
+import pt.ua.household.model.Light;
 import pt.ua.household.model.Temperature;
 
 import java.util.concurrent.CountDownLatch;
@@ -68,6 +70,30 @@ public class ServiceSensorReceiverImpl {
         ResponseEntity<Temperature> response = restTemplate.getForEntity(resourceUrl + "/"+houseId + "/"+roomId, Temperature.class);
         Temperature temperature = response.getBody();
         logger.info("Temperature Received in API -> " + temperature.getTemperature());
+
+    }
+
+    @Scheduled(fixedRate = 5000)
+    public void resolveHumidityState(){
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = "http://localhost:51040/humidity/recent";
+        long houseId = 1;
+        long roomId = 1;
+        ResponseEntity<Humidity> response = restTemplate.getForEntity(resourceUrl + "/"+houseId + "/"+roomId, Humidity.class);
+        Humidity humidity = response.getBody();
+        logger.info("Humidity Received in API -> " + humidity.getHumidity());
+
+    }
+
+    @Scheduled(fixedRate = 5000)
+    public void resolveLightState(){
+        RestTemplate restTemplate = new RestTemplate();
+        String resourceUrl = "http://localhost:51030/light/recent";
+        long houseId = 1;
+        long roomId = 1;
+        ResponseEntity<Light> response = restTemplate.getForEntity(resourceUrl + "/"+houseId + "/"+roomId, Light.class);
+        Light light = response.getBody();
+        logger.info("Light Received in API -> " + light.getLight());
 
     }
 

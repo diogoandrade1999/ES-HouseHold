@@ -1,14 +1,24 @@
 package pt.ua.household.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class Humidity {
 
+    @JsonProperty("humidityId")
     private long humidityId;
 
+    @JsonProperty("humidity")
     private double humidity;
+
+    @JsonProperty("date")
     private Date date;
+
+    @JsonProperty("houseId")
     private long houseId;
+
+    @JsonProperty("roomId")
     private long roomId;
 
     public long getHumidityId() {

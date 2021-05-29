@@ -13,4 +13,6 @@ public interface LightService {
     void deleteLightById(long id);
 
     long count();
+
+    Light getRecentLuminosity(long houseId, long roomId);
 }

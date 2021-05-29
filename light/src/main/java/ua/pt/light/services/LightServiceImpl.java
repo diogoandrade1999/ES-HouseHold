@@ -36,4 +36,9 @@ public class LightServiceImpl implements LightService {
     public void deleteLightById(long id) {
         this.lightRepository.deleteById(id);
     }
+
+    @Override
+    public Light getRecentLuminosity(long houseId, long roomId){
+        return lightRepository.findFirstByHouseIdAndRoomIdOrderByDateDesc(houseId, roomId);
+    }
 }
