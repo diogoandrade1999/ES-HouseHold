@@ -36,4 +36,9 @@ public class HumidityServiceImpl implements HumidityService {
     public void deleteHumidityById(long id) {
         this.humidityRepository.deleteById(id);
     }
+
+    @Override
+    public Humidity getRecentHumidity(long houseId, long roomId){
+        return humidityRepository.findFirstByHouseIdAndRoomIdOrderByDateDesc(houseId, roomId);
+    }
 }

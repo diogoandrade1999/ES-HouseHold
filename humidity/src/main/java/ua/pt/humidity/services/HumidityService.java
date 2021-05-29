@@ -13,4 +13,6 @@ public interface HumidityService {
     void deleteHumidityById(long id);
 
     long count();
+
+    Humidity getRecentHumidity(long houseId, long roomId);
 }

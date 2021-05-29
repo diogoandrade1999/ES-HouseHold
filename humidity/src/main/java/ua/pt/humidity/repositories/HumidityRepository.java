@@ -7,4 +7,6 @@ import ua.pt.humidity.entities.Humidity;
 
 @Repository
 public interface HumidityRepository extends JpaRepository<Humidity, Long> {
+
+    Humidity findFirstByHouseIdAndRoomIdOrderByDateDesc(long houseId, long roomId);
 }

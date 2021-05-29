@@ -36,4 +36,12 @@ public class HumidityController {
     public void delete(@PathVariable Long id) {
         this.humidityService.deleteHumidityById(id);
     }
+
+    // added to get the most recent humidity
+    // it should only by houseid, to avoid to call this api several times for each room in the household app side
+
+    @RequestMapping(value = "/recent/{houseId}/{roomId}", method = RequestMethod.GET)
+    public Humidity getRecentHumidity(@PathVariable long houseId, @PathVariable long roomId){
+        return humidityService.getRecentHumidity(houseId, roomId);
+    }
 }
