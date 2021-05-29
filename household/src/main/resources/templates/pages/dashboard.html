@@ -10,10 +10,39 @@
             <!--/*/ <th:block th:include="common/nav :: html"></th:block> /*/-->
         </header>
         <main class="container">
-            <p class="h1 text-center mt-5">Dashboard</p>
-            <div class="bg-white">
-                <canvas id="timeChart"></canvas>
+            <div class="row mt-5 g-3">
+                <div class="col-md-12 col-lg-6">
+                    <div
+                        class="bg-white p-2 rounded-3 text-center text-dark"
+                        id="temperatureChartContainer"
+                    >
+                        <div
+                            class="spinner-border"
+                            role="status"
+                            aria-hidden="true"
+                        ></div>
+                        <p class="fs-3">Loading...</p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <div
+                        class="bg-white p-2 rounded-3 text-center text-dark"
+                        id="humidityChartContainer"
+                    >
+                        <div
+                            class="spinner-border"
+                            role="status"
+                            aria-hidden="true"
+                        ></div>
+                        <p class="fs-3">Loading...</p>
+                    </div>
+                </div>
             </div>
+            <div
+                class="position-fixed bottom-0 end-0 p-3"
+                style="z-index: 5"
+                id="warningTemperature"
+            ></div>
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -21,49 +50,9 @@
             src="../static/js/chart_line.js"
             th:src="@{/js/chart_line.js}"
         ></script>
-        <script>
-            var timeChart = new Chart(
-                document.getElementById("timeChart"),
-                line_chart([], [], "Temperature")
-            );
-            setInterval(function () {
-                let date = new Date();
-                let endDate = parseInt((date.getTime() / 1000).toFixed(0));
-                date.setDate(date.getDate() - 1);
-                let startDate = parseInt((date.getTime() / 1000).toFixed(0));
-                $.ajax({
-                    url:
-                        "http://localhost:51020/temperature/" +
-                        startDate +
-                        "/" +
-                        endDate,
-                    method: "GET",
-                    dataType: "json",
-                })
-                    .done((res) => {
-                        var labelTime = [];
-                        var dataTemperature = [];
-                        res.slice(-50).forEach((element) => {
-                            let dateElement = new Date(element.date);
-                            labelTime.push(
-                                addZero(dateElement.getHours()).toString() +
-                                    ":" +
-                                    addZero(
-                                        dateElement.getMinutes()
-                                    ).toString() +
-                                    ":" +
-                                    addZero(dateElement.getSeconds()).toString()
-                            );
-                            dataTemperature.push(element.temperature);
-                        });
-                        timeChart.data.labels = labelTime;
-                        timeChart.data.datasets[0].data = dataTemperature;
-                        timeChart.update();
-                    })
-                    .fail((err) => {
-                        console.log("Fail request to Temperature API!");
-                    });
-            }, 5000);
-        </script>
+        <script
+            src="../static/js/dashboard.js"
+            th:src="@{/js/dashboard.js}"
+        ></script>
     </body>
 </html>

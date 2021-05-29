@@ -1,22 +1,53 @@
-const line_chart = (labelTime, labelData, labelName) => {
-    const data = {
-        labels: labelTime,
+const line_chart = (labelName) => {
+    var data = {
+        labels: [],
         datasets: [
             {
                 label: labelName,
                 backgroundColor: "rgb(255, 99, 132)",
                 borderColor: "rgb(255, 99, 132)",
+                borderWidth: 2,
+                radius: 0,
+                data: [],
+            },
+            {
+                label: "Threshold Cold",
+                backgroundColor: "rgb(0, 191, 255)",
+                borderColor: "rgb(0, 191, 255)",
                 borderWidth: 1,
                 radius: 0,
-                data: labelData,
+                data: [],
+            },
+            {
+                label: "Threshold Hot",
+                backgroundColor: "rgb(255, 69, 0)",
+                borderColor: "rgb(255, 69, 0)",
+                borderWidth: 1,
+                radius: 0,
+                data: [],
             },
         ],
     };
 
-    const config = {
+    var config = {
         type: "line",
         data,
-        options: {},
+        options: {
+            animation: {
+                duration: 0,
+            },
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "top",
+                },
+                title: {
+                    display: true,
+                    text: "Temperature House",
+                    size: 30,
+                },
+            },
+        },
     };
 
     return config;
