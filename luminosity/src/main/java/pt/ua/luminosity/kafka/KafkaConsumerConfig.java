@@ -1,4 +1,4 @@
-package ua.pt.luminosity.kafka;
+package pt.ua.luminosity.kafka;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
-import ua.pt.luminosity.entities.Luminosity;
+import pt.ua.luminosity.entities.Luminosity;
 
 @EnableKafka
 @Configuration

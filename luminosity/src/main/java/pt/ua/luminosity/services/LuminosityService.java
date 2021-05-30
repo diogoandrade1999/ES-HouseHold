@@ -1,8 +1,8 @@
-package ua.pt.luminosity.services;
+package pt.ua.luminosity.services;
 
 import java.util.Date;
 
-import ua.pt.luminosity.entities.Luminosity;
+import pt.ua.luminosity.entities.Luminosity;
 
 public interface LuminosityService {
 

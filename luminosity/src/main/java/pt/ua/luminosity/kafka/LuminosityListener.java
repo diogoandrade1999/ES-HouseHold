@@ -1,11 +1,11 @@
-package ua.pt.luminosity.kafka;
+package pt.ua.luminosity.kafka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
 
-import ua.pt.luminosity.entities.Luminosity;
-import ua.pt.luminosity.services.LuminosityService;
+import pt.ua.luminosity.entities.Luminosity;
+import pt.ua.luminosity.services.LuminosityService;
 
 @Configuration
 public class LuminosityListener {

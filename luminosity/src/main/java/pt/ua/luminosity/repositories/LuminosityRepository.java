@@ -1,11 +1,11 @@
-package ua.pt.luminosity.repositories;
+package pt.ua.luminosity.repositories;
 
 import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ua.pt.luminosity.entities.Luminosity;
+import pt.ua.luminosity.entities.Luminosity;
 
 @Repository
 public interface LuminosityRepository extends JpaRepository<Luminosity, Date> {

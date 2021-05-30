@@ -1,4 +1,4 @@
-package ua.pt.luminosity.entities;
+package pt.ua.luminosity.entities;
 
 import java.util.Date;
 

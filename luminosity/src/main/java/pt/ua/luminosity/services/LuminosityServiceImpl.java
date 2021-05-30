@@ -1,12 +1,12 @@
-package ua.pt.luminosity.services;
+package pt.ua.luminosity.services;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.pt.luminosity.entities.Luminosity;
-import ua.pt.luminosity.repositories.LuminosityRepository;
+import pt.ua.luminosity.entities.Luminosity;
+import pt.ua.luminosity.repositories.LuminosityRepository;
 
 @Service
 public class LuminosityServiceImpl implements LuminosityService {

@@ -1,4 +1,4 @@
-package ua.pt.luminosity.controllers;
+package pt.ua.luminosity.controllers;
 
 import java.util.Date;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.pt.luminosity.entities.Luminosity;
-import ua.pt.luminosity.services.LuminosityService;
+import pt.ua.luminosity.entities.Luminosity;
+import pt.ua.luminosity.services.LuminosityService;
 
 @RestController
 @RequestMapping("/luminosity")
