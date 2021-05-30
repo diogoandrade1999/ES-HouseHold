@@ -14,5 +14,6 @@ public interface TemperatureService {
 
     Iterable<Temperature> getTemperatureByDateAndHouseAndRoom(Date startDate, Date endDate, long houseId, long roomId);
 
-    Temperature getRecentTemperatures(long houseId, long roomId);
+    Temperature getRecentTemperature(long houseId, long roomId);
+
 }

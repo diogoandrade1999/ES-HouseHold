@@ -1,5 +1,7 @@
 # ES-HouseHold
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/0ccfc1368ab04e319cfb592799e6b538)](https://www.codacy.com/gh/diogoandrade1999/ES-HouseHold/dashboard?utm_source=github.com&utm_medium=referral&utm_content=diogoandrade1999/ES-HouseHold&utm_campaign=Badge_Grade)
+
 ### PORTS:
 
 -   51000 to 51999

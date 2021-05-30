@@ -36,8 +36,8 @@ public class TemperatureServiceImpl implements TemperatureService {
     }
 
     @Override
-    public Temperature getRecentTemperatures(long houseId, long roomId){
-        return temperatureRepository.findFirstByHouseIdAndRoomIdOrderByDateDesc(houseId, roomId);
+    public Temperature getRecentTemperature(long houseId, long roomId) {
+        return this.temperatureRepository.findFirstByHouseIdAndRoomIdOrderByDateDesc(houseId, roomId);
     }
 
 }

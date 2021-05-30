@@ -45,12 +45,9 @@ public class TemperatureController {
 
     // added to get the most recent temperature
     // it should only by houseid, to avoid to call this api several times for each room in the household app side
-
     @RequestMapping(value = "/recent/{houseId}/{roomId}", method = RequestMethod.GET)
-    public Temperature getRecentTemperatures(@PathVariable long houseId, @PathVariable long roomId){
-        return temperatureService.getRecentTemperatures(houseId, roomId);
+    public Temperature getRecentTemperature(@PathVariable long houseId, @PathVariable long roomId){
+        return temperatureService.getRecentTemperature(houseId, roomId);
     }
-
-
 
 }
