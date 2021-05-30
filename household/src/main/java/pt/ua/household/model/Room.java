@@ -1,17 +1,16 @@
 package pt.ua.household.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
 
 public class Room {
 
     private long roomId;
-    private static int id;
     private boolean AirConditionerOn;
 
-    public Room(){
-        this.roomId = id;
-        id +=1;
+    public Room(long roomId){
+        this.roomId = roomId;
         this.AirConditionerOn = false;
 
     }
@@ -22,14 +21,6 @@ public class Room {
 
     public void setRoomId(long roomId) {
         this.roomId = roomId;
-    }
-
-    public static int getId() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        Room.id = id;
     }
 
     public boolean isAirConditionerOn() {

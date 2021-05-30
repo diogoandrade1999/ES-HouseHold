@@ -16,6 +16,17 @@ public class Temperature {
     @JsonProperty("roomId")
     private long roomId;
 
+    public Temperature(){
+
+    }
+    public Temperature(double temperature, Date date, long houseId, long roomId) {
+        this.temperature = temperature;
+        this.date = date;
+        this.houseId = houseId;
+        this.roomId = roomId;
+    }
+
+
     public double getTemperature() {
         return this.temperature;
     }

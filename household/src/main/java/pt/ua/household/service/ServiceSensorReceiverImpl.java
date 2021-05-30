@@ -25,9 +25,8 @@ public class ServiceSensorReceiverImpl {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @Autowired
-    private House house;
-
+    //@Autowired
+    private House house = new House();
 
     private static Logger logger = LogManager.getLogger(ServiceSensorReceiverImpl.class);
 
@@ -104,5 +103,10 @@ public class ServiceSensorReceiverImpl {
         return luminosity;
 
     }
+
+    public House getHouseInformation(){
+        return house;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package pt.ua.household.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,9 +13,9 @@ public class House {
     private boolean CentralHeatingOn;
 
     public House(){
-        Room room1 = new Room();
-        Room room2 = new Room();
-        Room room3 = new Room();
+        Room room1 = new Room(1);
+        Room room2 = new Room(2);
+        Room room3 = new Room(3);
         rooms.add(room1);
         rooms.add(room2);
         rooms.add(room3);
