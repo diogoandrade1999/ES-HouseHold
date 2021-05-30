@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login</title>
+
+        <!--/*/ <th:block th:include="common/head :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div
+            class="
+                d-flex
+                flex-column
+                min-vh-100
+                justify-content-center
+                align-items-center
+                bg-dark
+            "
+        >
+            <div class="bg-white p-5 rounded-3 w-25">
+                <a th:href="@{/}" class="btn btn-outline-success w-100 mb-5">
+                    Return to Home Page
+                </a>
+                <div class="alert alert-info" th:if="${param.logout}">
+                    You have been logged out.
+                </div>
+                <form th:action="@{/user/login}" method="post">
+                    <p class="text-center fs-3">Login</p>
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="username"
+                            placeholder="Email"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <div
+                        class="mb-3 alert alert-danger"
+                        role="alert"
+                        th:if="${param.error}"
+                    >
+                        Invalid username and password.
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                        Sign In
+                    </button>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Don't have an Account?
+                        <a th:href="@{/user/register}">Create one!</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

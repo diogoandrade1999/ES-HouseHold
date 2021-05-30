@@ -1,4 +1,4 @@
-package pt.ua.simulator.entities;
+package pt.ua.household.entities;
 
 import java.util.Set;
 
@@ -27,10 +27,6 @@ public class House {
 
     public long getHouseId() {
         return this.id;
-    }
-
-    public void setHouseId(long id) {
-        this.id = id;
     }
 
     public Set<Room> getRooms() {

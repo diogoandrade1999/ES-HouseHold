@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Register</title>
+
+        <!--/*/ <th:block th:include="common/head :: head"></th:block> /*/-->
+    </head>
+    <body>
+        <div
+            class="
+                d-flex
+                flex-column
+                min-vh-100
+                justify-content-center
+                align-items-center
+                bg-dark
+            "
+        >
+            <div class="bg-white p-5 rounded-3 w-25">
+                <a th:href="@{/}" class="btn btn-outline-success w-100 mb-5">
+                    Return to Home Page
+                </a>
+                <form
+                    th:action="@{/user/register}"
+                    th:object="${user}"
+                    method="post"
+                >
+                    <p class="text-center fs-3">Register</p>
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="text"
+                            placeholder="First Name"
+                            th:field="*{firstName}"
+                        />
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        th:if="${error_firstName}"
+                        th:text="${error_firstName}"
+                    >
+                        Validation error
+                    </div>
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="text"
+                            placeholder="Last Name"
+                            th:field="*{lastName}"
+                        />
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        th:if="${error_lastName}"
+                        th:text="${error_lastName}"
+                    >
+                        Validation error
+                    </div>
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="email"
+                            placeholder="Email"
+                            th:field="*{email}"
+                        />
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        th:if="${error_email}"
+                        th:text="${error_email}"
+                    >
+                        Validation error
+                    </div>
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="password"
+                            placeholder="Password"
+                            th:field="*{password}"
+                        />
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        th:if="${error_password}"
+                        th:text="${error_password}"
+                    >
+                        Validation error
+                    </div>
+                    <div class="mb-3">
+                        <input
+                            class="form-control"
+                            type="password"
+                            placeholder="Confirm Password"
+                            th:field="*{matchingPassword}"
+                        />
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        th:if="${error_matchingPassword}"
+                        th:text="${error_matchingPassword}"
+                    >
+                        Validation error
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                        Sign Up
+                    </button>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Already have an Account?
+                        <a th:href="@{/user/login}">Sign In!</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

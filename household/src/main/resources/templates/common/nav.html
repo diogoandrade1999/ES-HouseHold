@@ -25,17 +25,50 @@
                         <a class="nav-link" th:href="@{'/'}">House</a>
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <button class="btn btn-outline-success" type="submit">
-                        Sign In
-                    </button>
-                    <button class="btn btn-outline-dark" type="submit">
-                        Sign Up
-                    </button>
-                    <button class="btn btn-outline-danger" type="submit">
-                        Sign Out
-                    </button>
-                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a
+                            th:if="${!login}"
+                            th:href="@{/user/login}"
+                            class="btn btn-outline-success"
+                        >
+                            Sign In
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            th:if="${!login}"
+                            th:href="@{/user/register}"
+                            class="btn btn-outline-dark"
+                        >
+                            Sign Up
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" th:if="${login}">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            id="navbarDropdownMenuLink"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            th:text="${username}"
+                        >
+                        </a>
+                        <ul
+                            class="dropdown-menu"
+                            aria-labelledby="navbarDropdownMenuLink"
+                        >
+                            <li>
+                                <a
+                                    th:href="@{/user/logout}"
+                                    class="dropdown-item"
+                                >
+                                    LogOut
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
