@@ -6,9 +6,6 @@ import java.util.Date;
 
 public class Light {
 
-    @JsonProperty("lightId")
-    private long lightId;
-
     @JsonProperty("light")
     private double light;
 
@@ -20,10 +17,6 @@ public class Light {
 
     @JsonProperty("roomId")
     private long roomId;
-
-    public long getLightId() {
-        return this.lightId;
-    }
 
     public double getLight() {
         return this.light;
@@ -59,13 +52,8 @@ public class Light {
 
     @Override
     public String toString() {
-        return "{" +
-            " lightId='" + getLightId() + "'" +
-            ", light='" + getLight() + "'" +
-            ", date='" + getDate() + "'" +
-            ", houseId='" + getHouseId() + "'" +
-            ", roomId='" + getRoomId() + "'" +
-            "}";
+        return "{" + "light='" + getLight() + "'" + ", date='" + getDate() + "'" + ", houseId='" + getHouseId() + "'"
+                + ", roomId='" + getRoomId() + "'" + "}";
     }
 
 }

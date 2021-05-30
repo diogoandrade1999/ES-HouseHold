@@ -6,9 +6,6 @@ import java.util.Date;
 
 public class Humidity {
 
-    @JsonProperty("humidityId")
-    private long humidityId;
-
     @JsonProperty("humidity")
     private double humidity;
 
@@ -20,10 +17,6 @@ public class Humidity {
 
     @JsonProperty("roomId")
     private long roomId;
-
-    public long getHumidityId() {
-        return this.humidityId;
-    }
 
     public double getHumidity() {
         return this.humidity;
@@ -59,8 +52,8 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "{" + " humidityId='" + getHumidityId() + "'" + ", humidity='" + getHumidity() + "'" + ", date='"
-                + getDate() + "'" + ", houseId='" + getHouseId() + "'" + ", roomId='" + getRoomId() + "'" + "}";
+        return "{" + "humidity='" + getHumidity() + "'" + ", date='" + getDate() + "'" + ", houseId='" + getHouseId()
+                + "'" + ", roomId='" + getRoomId() + "'" + "}";
     }
 
 }

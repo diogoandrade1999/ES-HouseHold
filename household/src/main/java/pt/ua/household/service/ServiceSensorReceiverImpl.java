@@ -40,21 +40,19 @@ public class ServiceSensorReceiverImpl {
     }
 
     /*
-    @KafkaListener(topics = TOPIC_TEMPERATURE, groupId = "1")
-    public void consumeTemperature(String message) throws IOException {
-        // logger.info(String.format("Consumed message -> %s", message));
-
-        // Convert json message to Temperature object
-        ObjectMapper mapper = new ObjectMapper();
-        Temperature temp = mapper.readValue(message, Temperature.class);
-        logger.info("Temperature Received -> " + temp.getTemperature());
-
-        if (temp.getTemperature() >= 20) {
-            sendCommand("Turn on AC!");
-        }
-
-    }
-    */
+     * @KafkaListener(topics = TOPIC_TEMPERATURE, groupId = "1") public void
+     * consumeTemperature(String message) throws IOException { //
+     * logger.info(String.format("Consumed message -> %s", message));
+     * 
+     * // Convert json message to Temperature object ObjectMapper mapper = new
+     * ObjectMapper(); Temperature temp = mapper.readValue(message,
+     * Temperature.class); logger.info("Temperature Received -> " +
+     * temp.getTemperature());
+     * 
+     * if (temp.getTemperature() >= 20) { sendCommand("Turn on AC!"); }
+     * 
+     * }
+     */
     public void sendCommand(String message) {
         // logger.info("Sending message " + message + " to topic "+ TOPIC_COMMANDS);
         kafkaTemplate.send(TOPIC_COMMANDS, message);
@@ -62,40 +60,42 @@ public class ServiceSensorReceiverImpl {
     }
 
     @Scheduled(fixedRate = 5000)
-    public void resolveTemperatureState(){
+    public void resolveTemperatureState() {
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = "http://localhost:51020/temperature/recent";
         long houseId = 1;
         long roomId = 1;
-        ResponseEntity<Temperature> response = restTemplate.getForEntity(resourceUrl + "/"+houseId + "/"+roomId, Temperature.class);
+        ResponseEntity<Temperature> response = restTemplate.getForEntity(resourceUrl + "/" + houseId + "/" + roomId,
+                Temperature.class);
         Temperature temperature = response.getBody();
         logger.info("Temperature Received in API -> " + temperature.getTemperature());
 
     }
 
     @Scheduled(fixedRate = 5000)
-    public void resolveHumidityState(){
+    public void resolveHumidityState() {
         RestTemplate restTemplate = new RestTemplate();
         String resourceUrl = "http://localhost:51040/humidity/recent";
         long houseId = 1;
         long roomId = 1;
-        ResponseEntity<Humidity> response = restTemplate.getForEntity(resourceUrl + "/"+houseId + "/"+roomId, Humidity.class);
+        ResponseEntity<Humidity> response = restTemplate.getForEntity(resourceUrl + "/" + houseId + "/" + roomId,
+                Humidity.class);
         Humidity humidity = response.getBody();
         logger.info("Humidity Received in API -> " + humidity.getHumidity());
 
     }
 
     @Scheduled(fixedRate = 5000)
-    public void resolveLightState(){
+    public void resolveLightState() {
         RestTemplate restTemplate = new RestTemplate();
-        String resourceUrl = "http://localhost:51030/light/recent";
+        String resourceUrl = "http://localhost:51030/luminosity/recent";
         long houseId = 1;
         long roomId = 1;
-        ResponseEntity<Light> response = restTemplate.getForEntity(resourceUrl + "/"+houseId + "/"+roomId, Light.class);
+        ResponseEntity<Light> response = restTemplate.getForEntity(resourceUrl + "/" + houseId + "/" + roomId,
+                Light.class);
         Light light = response.getBody();
         logger.info("Light Received in API -> " + light.getLight());
 
     }
-
 
 }
