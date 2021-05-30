@@ -2,19 +2,19 @@ package pt.ua.simulator.domains;
 
 import java.util.Date;
 
-public class Humidity {
+public class Luminosity {
 
-    private double humidity;
+    private double luminosity;
     private Date date;
     private long houseId;
     private long roomId;
 
-    public double getHumidity() {
-        return this.humidity;
+    public double getLuminosity() {
+        return this.luminosity;
     }
 
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
+    public void setLuminosity(double luminosity) {
+        this.luminosity = luminosity;
     }
 
     public Date getDate() {
@@ -43,8 +43,8 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "{" + " humidity='" + getHumidity() + "'" + ", date='" + getDate() + "'" + ", houseId='" + getHouseId()
-                + "'" + ", roomId='" + getRoomId() + "'" + "}";
+        return "{" + " luminosity='" + getLuminosity() + "'" + ", date='" + getDate() + "'" + ", houseId='"
+                + getHouseId() + "'" + ", roomId='" + getRoomId() + "'" + "}";
     }
 
 }

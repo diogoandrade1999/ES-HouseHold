@@ -9,57 +9,57 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import pt.ua.simulator.domains.Humidity;
+import pt.ua.simulator.domains.Luminosity;
 
 @Component
-public class HumidityScheduler {
+public class LuminosityScheduler {
 
     @Autowired
-    private KafkaTemplate<String, Humidity> kafkaTemplate;
+    private KafkaTemplate<String, Luminosity> kafkaTemplate;
 
-    public void sendHumidity(Humidity humidity) {
-        this.kafkaTemplate.send("esp51-humidity", humidity);
+    public void sendLuminosity(Luminosity luminosity) {
+        this.kafkaTemplate.send("esp51-luminosity", luminosity);
     }
 
     @Scheduled(fixedRate = 5000)
-    public void humidity() {
-        Humidity humidity = new Humidity();
-        humidity.setHouseId(1);
-        humidity.setRoomId(1);
+    public void luminosity() {
+        Luminosity luminosity = new Luminosity();
+        luminosity.setHouseId(1);
+        luminosity.setRoomId(1);
 
         // today
         Date date = new Date();
-        humidity.setDate(date);
+        luminosity.setDate(date);
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int hour = cal.get(Calendar.HOUR_OF_DAY);
         int month = cal.get(Calendar.MONTH);
 
-        double hum;
+        double lum;
         Random r = new Random();
 
         // Check if hour is between 7am and 7pm (day)
         if (hour >= 7 && hour <= 19) {
             if (month >= 1 && month <= 3)
-                hum = (r.nextDouble() * (60 - 30)) + 30;
+                lum = (r.nextDouble() * (180 - 120)) + 120;
             else if (month >= 4 && month <= 6)
-                hum = (r.nextDouble() * (100 - 70)) + 70;
+                lum = (r.nextDouble() * (200 - 130)) + 130;
             else if (month >= 6 && month <= 9)
-                hum = (r.nextDouble() * (80 - 50)) + 50;
+                lum = (r.nextDouble() * (500 - 150)) + 150;
             else
-                hum = (r.nextDouble() * (50 - 20)) + 20;
+                lum = (r.nextDouble() * (120 - 100)) + 100;
         } else {
             if (month >= 1 && month <= 3)
-                hum = (r.nextDouble() * (50 - 20)) + 20;
+                lum = (r.nextDouble() * (6 - 1)) + 1;
             else if (month >= 4 && month <= 6)
-                hum = (r.nextDouble() * (90 - 60)) + 60;
+                lum = (r.nextDouble() * (8 - 1)) + 1;
             else if (month >= 6 && month <= 9)
-                hum = (r.nextDouble() * (70 - 40)) + 40;
+                lum = (r.nextDouble() * (10 - 1)) + 1;
             else
-                hum = (r.nextDouble() * (40 - 10)) + 10;
+                lum = (r.nextDouble() * (3 - 1)) + 1;
         }
-        humidity.setHumidity(hum);
-        this.sendHumidity(humidity);
+        luminosity.setLuminosity(lum);
+        this.sendLuminosity(luminosity);
     }
 }

@@ -1,11 +1,17 @@
-package pt.ua.simulator.domains;
+package pt.ua.humidity.entities;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Humidity {
 
-    private double humidity;
+    @Id
     private Date date;
+
+    private double humidity;
     private long houseId;
     private long roomId;
 
@@ -43,8 +49,12 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "{" + " humidity='" + getHumidity() + "'" + ", date='" + getDate() + "'" + ", houseId='" + getHouseId()
-                + "'" + ", roomId='" + getRoomId() + "'" + "}";
+        return "{" +
+            " date='" + getDate() + "'" +
+            ", humidity='" + getHumidity() + "'" +
+            ", houseId='" + getHouseId() + "'" +
+            ", roomId='" + getRoomId() + "'" +
+            "}";
     }
 
 }

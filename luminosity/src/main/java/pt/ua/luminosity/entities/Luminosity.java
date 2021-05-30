@@ -1,20 +1,26 @@
-package pt.ua.simulator.domains;
+package ua.pt.luminosity.entities;
 
 import java.util.Date;
 
-public class Humidity {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-    private double humidity;
+@Entity
+public class Luminosity {
+
+    @Id
     private Date date;
+
+    private double luminosity;
     private long houseId;
     private long roomId;
 
-    public double getHumidity() {
-        return this.humidity;
+    public double getLuminosity() {
+        return this.luminosity;
     }
 
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
+    public void setLuminosity(double luminosity) {
+        this.luminosity = luminosity;
     }
 
     public Date getDate() {
@@ -43,8 +49,8 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "{" + " humidity='" + getHumidity() + "'" + ", date='" + getDate() + "'" + ", houseId='" + getHouseId()
-                + "'" + ", roomId='" + getRoomId() + "'" + "}";
+        return "{" + "luminosity='" + getLuminosity() + "'" + ", date='" + getDate() + "'" + ", houseId='"
+                + getHouseId() + "'" + ", roomId='" + getRoomId() + "'" + "}";
     }
 
 }

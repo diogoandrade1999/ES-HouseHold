@@ -45,10 +45,10 @@ services:
         links:
             - postgres
 
-    light-app:
-        container_name: light-app
+    luminosity-app:
+        container_name: luminosity-app
         build:
-            context: ./light
+            context: ./luminosity
             dockerfile: Dockerfile
         ports:
             - "51030:51030"

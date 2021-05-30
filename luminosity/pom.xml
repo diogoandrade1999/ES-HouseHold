@@ -10,10 +10,10 @@
 		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>pt.ua</groupId>
-	<artifactId>humidity</artifactId>
+	<artifactId>luminosity</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>humidity</name>
-	<description>Humidity App</description>
+	<name>luminosity</name>
+	<description>Luminosity App</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

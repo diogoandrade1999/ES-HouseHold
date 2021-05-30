@@ -60,7 +60,6 @@ public class TemperatureScheduler {
                 temp = (r.nextDouble() * (17 - 10)) + 10;
         }
         temperature.setTemperature(temp);
-        System.out.println(temperature);
         this.sendTemperature(temperature);
     }
 }

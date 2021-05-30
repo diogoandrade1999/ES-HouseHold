@@ -24,7 +24,7 @@ pipeline {
                         echo "M2_HOME = ${M2_HOME}"
                     '''
                 }
-                dir('light'){
+                dir('luminosity'){
                     sh '''
                         echo "PATH = ${PATH}"
                         echo "M2_HOME = ${M2_HOME}"
@@ -46,7 +46,7 @@ pipeline {
                 dir('temperature'){
                     sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
-                dir('light'){
+                dir('luminosity'){
                     sh 'mvn -Dmaven.test.failure.ignore=true install' 
                 }
                 dir('humidity'){
@@ -61,7 +61,7 @@ pipeline {
                     dir('temperature'){
                         junit 'target/surefire-reports/**/*.xml' 
                     }
-                    dir('light'){
+                    dir('luminosity'){
                         junit 'target/surefire-reports/**/*.xml' 
                     }
                     dir('humidity'){
@@ -74,7 +74,7 @@ pipeline {
             steps{
                 sh 'mvn deploy -f ./simulator/pom.xml -s settings.xml' 
                 sh 'mvn deploy -f ./temperature/pom.xml -s settings.xml' 
-                sh 'mvn deploy -f ./light/pom.xml -s settings.xml' 
+                sh 'mvn deploy -f ./luminosity/pom.xml -s settings.xml' 
                 sh 'mvn deploy -f ./humidity/pom.xml -s settings.xml' 
             }
         }
@@ -88,8 +88,8 @@ pipeline {
                         def temperatureApp = docker.build("esp51/temperature", "./temperature")
                         temperatureApp.push()
 
-                        def lightApp = docker.build("esp51/light", "./light")
-                        lightApp.push()
+                        def luminosityApp = docker.build("esp51/luminosity", "./luminosity")
+                        luminosityApp.push()
 
                         def humidityApp = docker.build("esp51/humidity", "./humidity")
                         humidityApp.push()
@@ -121,12 +121,12 @@ pipeline {
                     sshCommand remote: remote, command: "docker create -p 51020:51020 --name esp51-temperature 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker start esp51-temperature"
 
-                    sshCommand remote: remote, command: "docker stop esp51-light"
-                    sshCommand remote: remote, command: "docker rm esp51-light"
-                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/light"
-                    sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/light"
-                    sshCommand remote: remote, command: "docker create -p 51030:51030 --name esp51-light 192.168.160.48:5000/esp51/light"
-                    sshCommand remote: remote, command: "docker start esp51-light"
+                    sshCommand remote: remote, command: "docker stop esp51-luminosity"
+                    sshCommand remote: remote, command: "docker rm esp51-luminosity"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/luminosity"
+                    sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/luminosity"
+                    sshCommand remote: remote, command: "docker create -p 51030:51030 --name esp51-luminosity 192.168.160.48:5000/esp51/luminosity"
+                    sshCommand remote: remote, command: "docker start esp51-luminosity"
 
                     sshCommand remote: remote, command: "docker stop esp51-humidity"
                     sshCommand remote: remote, command: "docker rm esp51-humidity"
