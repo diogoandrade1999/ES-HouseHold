@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
-public class Light {
+public class Luminosity {
 
-    @JsonProperty("light")
+    @JsonProperty("luminosity")
     private double light;
 
     @JsonProperty("date")
