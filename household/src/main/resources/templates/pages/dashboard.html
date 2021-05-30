@@ -10,7 +10,7 @@
             <!--/*/ <th:block th:include="common/nav :: html"></th:block> /*/-->
         </header>
         <main class="container">
-            <div class="row mt-5 g-3">
+            <div class="row g-3 mt-5">
                 <div class="col-md-12 col-lg-6">
                     <div
                         class="bg-white p-2 rounded-3 text-center text-dark"
@@ -37,12 +37,28 @@
                         <p class="fs-3">Loading...</p>
                     </div>
                 </div>
+                <div class="col-md-12 col-lg-6">
+                    <div
+                        class="bg-white p-2 rounded-3 text-center text-dark"
+                        id="luminosityChartContainer"
+                    >
+                        <div
+                            class="spinner-border"
+                            role="status"
+                            aria-hidden="true"
+                        ></div>
+                        <p class="fs-3">Loading...</p>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-6">
             </div>
-            <div
-                class="position-fixed bottom-0 end-0 p-3"
-                style="z-index: 5"
-                id="warningTemperature"
-            ></div>
+            <div class="position-relative">
+                <div class="position-fixed bottom-0 end-0 p-3 z-5">
+                    <div class="mb-2" id="warningTemperature"></div>
+                    <div class="mb-2" id="warningHumidity"></div>
+                    <div class="mb-2" id="warningLuminosity"></div>
+                </div>
+            </div>
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
