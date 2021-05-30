@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
-import pt.ua.household.model.Humidity;
-import pt.ua.household.model.Luminosity;
-import pt.ua.household.model.Temperature;
+import pt.ua.household.model.*;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -26,6 +24,10 @@ public class ServiceSensorReceiverImpl {
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
+
+    @Autowired
+    private House house;
+
 
     private static Logger logger = LogManager.getLogger(ServiceSensorReceiverImpl.class);
 
@@ -48,6 +50,27 @@ public class ServiceSensorReceiverImpl {
 
         Luminosity luminosity = resolveLightState(houseId, roomId);
         logger.info("Luminosity Received in API -> " + luminosity.getLight());
+
+        for (Room r: house.getRooms()){
+
+            if (r.getRoomId() == roomId){
+                //logger.info("Found room with id 1");
+
+                if (temperature.getTemperature() >= 20){
+                    if(!r.isAirConditionerOn()){
+                        logger.info("Turning on AC in room " + r.getRoomId() + "!");
+                        r.setAirConditionerOn(true);
+                    }
+                }
+
+                else if(temperature.getTemperature() <= 5){
+                    if(r.isAirConditionerOn()){
+                        logger.info("Turning off AC in room " + r.getRoomId() + "!");
+                        r.setAirConditionerOn(false);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -58,7 +81,6 @@ public class ServiceSensorReceiverImpl {
                 Temperature.class);
         Temperature temperature = response.getBody();
         return temperature;
-
 
     }
 
