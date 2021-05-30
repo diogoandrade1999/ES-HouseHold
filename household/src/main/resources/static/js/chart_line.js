@@ -11,7 +11,7 @@ const line_chart = (labelName) => {
                 data: [],
             },
             {
-                label: "Threshold Cold",
+                label: "Lower Threshold",
                 backgroundColor: "rgb(0, 191, 255)",
                 borderColor: "rgb(0, 191, 255)",
                 borderWidth: 1,
@@ -19,7 +19,7 @@ const line_chart = (labelName) => {
                 data: [],
             },
             {
-                label: "Threshold Hot",
+                label: "Upper Threshold",
                 backgroundColor: "rgb(255, 69, 0)",
                 borderColor: "rgb(255, 69, 0)",
                 borderWidth: 1,
@@ -43,7 +43,7 @@ const line_chart = (labelName) => {
                 },
                 title: {
                     display: true,
-                    text: "Temperature House",
+                    text: labelName + " House",
                     size: 30,
                 },
             },
