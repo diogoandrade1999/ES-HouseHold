@@ -20,10 +20,8 @@ import java.util.concurrent.CountDownLatch;
 @Service
 @Transactional
 @Component
-@EnableKafka
 public class ServiceSensorReceiverImpl {
 
-    private static final String TOPIC_TEMPERATURE = "esp51-temperature";
     private static final String TOPIC_COMMANDS = "esp51-commands";
 
     @Autowired
@@ -31,26 +29,6 @@ public class ServiceSensorReceiverImpl {
 
     private static Logger logger = LogManager.getLogger(ServiceSensorReceiverImpl.class);
 
-    private CountDownLatch latch = new CountDownLatch(1);
-
-    public CountDownLatch getLatch() {
-        return latch;
-    }
-
-    /*
-     * @KafkaListener(topics = TOPIC_TEMPERATURE, groupId = "1") public void
-     * consumeTemperature(String message) throws IOException { //
-     * logger.info(String.format("Consumed message -> %s", message));
-     *
-     * // Convert json message to Temperature object ObjectMapper mapper = new
-     * ObjectMapper(); Temperature temp = mapper.readValue(message,
-     * Temperature.class); logger.info("Temperature Received -> " +
-     * temp.getTemperature());
-     *
-     * if (temp.getTemperature() >= 20) { sendCommand("Turn on AC!"); }
-     *
-     * }
-     */
     public void sendCommand(String message) {
         // logger.info("Sending message " + message + " to topic "+ TOPIC_COMMANDS);
         kafkaTemplate.send(TOPIC_COMMANDS, message);
