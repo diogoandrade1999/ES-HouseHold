@@ -51,4 +51,9 @@ public class TemperatureController {
         return this.temperatureService.getRecentTemperature(houseId, roomId);
     }
 
+    @RequestMapping(value = "/version", method = RequestMethod.GET)
+    public String getVersion() {
+        return "1.0";
+    }
+
 }

@@ -70,6 +70,22 @@ pipeline {
                 }
             }
         }
+         stage('Integration tests') {
+            steps {
+                script {
+                    dir('temperature'){
+                        def mvnHome = tool 'Maven 3.5.2'
+                        if (isUnix()) {
+                            sh "'${mvnHome}/bin/mvn'  verify -Dunit-tests.skip=true"
+                        } else {
+                            bat(/"${mvnHome}\bin\mvn" verify -Dunit-tests.skip=true/)
+                        }
+                    }
+
+                }
+                cucumber buildStatus: null, fileIncludePattern: '**/cucumber.json', jsonReportDirectory: 'target', sortingMethod: 'ALPHABETICAL'
+            }
+        }
         stage ('Deploy') {
             steps{
                 sh 'mvn deploy -f ./simulator/pom.xml -s settings.xml' 
@@ -107,30 +123,30 @@ pipeline {
                         remote.allowAnyHosts = true
                     }
 
-                    sshCommand remote: remote, command: "docker stop esp51-simulator"
-                    sshCommand remote: remote, command: "docker rm esp51-simulator"
-                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/simulator"
+                    sshCommand remote: remote, command: "docker stop esp51-simulator || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rm esp51-simulator || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/simulator || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/simulator"
                     sshCommand remote: remote, command: "docker create -p 51010:51010 --name esp51-simulator 192.168.160.48:5000/esp51/simulator"
                     sshCommand remote: remote, command: "docker start esp51-simulator"
 
-                    sshCommand remote: remote, command: "docker stop esp51-temperature"
-                    sshCommand remote: remote, command: "docker rm esp51-temperature"
-                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/temperature"
+                    sshCommand remote: remote, command: "docker stop esp51-temperature || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rm esp51-temperature || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/temperature || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker create -p 51020:51020 --name esp51-temperature 192.168.160.48:5000/esp51/temperature"
                     sshCommand remote: remote, command: "docker start esp51-temperature"
 
-                    sshCommand remote: remote, command: "docker stop esp51-luminosity"
-                    sshCommand remote: remote, command: "docker rm esp51-luminosity"
-                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/luminosity"
+                    sshCommand remote: remote, command: "docker stop esp51-luminosity || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rm esp51-luminosity || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/luminosity || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/luminosity"
                     sshCommand remote: remote, command: "docker create -p 51030:51030 --name esp51-luminosity 192.168.160.48:5000/esp51/luminosity"
                     sshCommand remote: remote, command: "docker start esp51-luminosity"
 
-                    sshCommand remote: remote, command: "docker stop esp51-humidity"
-                    sshCommand remote: remote, command: "docker rm esp51-humidity"
-                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/humidity"
+                    sshCommand remote: remote, command: "docker stop esp51-humidity || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rm esp51-humidity || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/humidity || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/humidity"
                     sshCommand remote: remote, command: "docker create -p 51030:51030 --name esp51-humidity 192.168.160.48:5000/esp51/humidity"
                     sshCommand remote: remote, command: "docker start esp51-humidity"
