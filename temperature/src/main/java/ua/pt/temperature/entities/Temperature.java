@@ -1,5 +1,7 @@
 package ua.pt.temperature.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,10 +11,16 @@ import javax.persistence.Id;
 public class Temperature {
 
     @Id
+    @JsonProperty("date")
     private Date date;
 
+    @JsonProperty("temperature")
     private double temperature;
+
+    @JsonProperty("houseId")
     private long houseId;
+
+    @JsonProperty("roomId")
     private long roomId;
 
     public double getTemperature() {
