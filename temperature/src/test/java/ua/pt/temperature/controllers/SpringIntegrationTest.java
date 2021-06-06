@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -19,6 +20,7 @@ import static org.junit.Assert.assertThat;
 
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("INTEGRATION_TEST")
 public class SpringIntegrationTest {
 
     @Autowired

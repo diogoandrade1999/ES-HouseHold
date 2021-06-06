@@ -74,12 +74,7 @@ pipeline {
             steps {
                 script {
                     dir('temperature'){
-                        def mvnHome = tool 'Maven 3.5.2'
-                        if (isUnix()) {
-                            sh "'${mvnHome}/bin/mvn'  verify -Dunit-tests.skip=true"
-                        } else {
-                            bat(/"${mvnHome}\bin\mvn" verify -Dunit-tests.skip=true/)
-                        }
+                        sh 'mvn verify -Dunit-tests.skip=true'
                     }
 
                 }
