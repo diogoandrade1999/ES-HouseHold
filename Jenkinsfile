@@ -74,7 +74,7 @@ pipeline {
             steps {
                 script {
                     dir('temperature'){
-                        sh 'mvn -Dunit-tests.skip=true test'
+                        sh 'mvn -Dunit-tests.skip=true verify'
                     }
 
                 }
