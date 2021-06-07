@@ -55,10 +55,10 @@ pipeline {
         }
         stage ('Deploy') {
             steps{
-                sh 'mvn deploy -f ./simulator/pom.xml -s settings.xml' 
-                sh 'mvn deploy -f ./temperature/pom.xml -s settings.xml' 
-                sh 'mvn deploy -f ./luminosity/pom.xml -s settings.xml' 
-                sh 'mvn deploy -f ./humidity/pom.xml -s settings.xml' 
+                sh 'mvn deploy -DskipTests -f ./simulator/pom.xml -s settings.xml' 
+                sh 'mvn deploy -DskipTests -f ./temperature/pom.xml -s settings.xml' 
+                sh 'mvn deploy -DskipTests -f ./luminosity/pom.xml -s settings.xml' 
+                sh 'mvn deploy -DskipTests -f ./humidity/pom.xml -s settings.xml' 
             }
         }
         stage('Publish'){
