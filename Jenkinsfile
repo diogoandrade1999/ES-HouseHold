@@ -10,47 +10,19 @@ pipeline {
     }
 
     stages {
-        stage ('Start') {
-            steps {
-                dir('simulator'){
-                    sh '''
-                        echo "PATH = ${PATH}"
-                        echo "M2_HOME = ${M2_HOME}"
-                    '''
-                }
-                dir('temperature'){
-                    sh '''
-                        echo "PATH = ${PATH}"
-                        echo "M2_HOME = ${M2_HOME}"
-                    '''
-                }
-                dir('luminosity'){
-                    sh '''
-                        echo "PATH = ${PATH}"
-                        echo "M2_HOME = ${M2_HOME}"
-                    '''
-                }
-                dir('humidity'){
-                    sh '''
-                        echo "PATH = ${PATH}"
-                        echo "M2_HOME = ${M2_HOME}"
-                    '''
-                }
-            }
-        }
         stage('Build And Unit Tests') {
             steps {
                 dir('simulator'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true -Dintegration-tests.skip=true clean install' 
                 }
                 dir('temperature'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true -Dintegration-tests.skip=true clean install' 
                 }
                 dir('luminosity'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true -Dintegration-tests.skip=true clean install' 
                 }
                 dir('humidity'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true -Dintegration-tests.skip=true clean install' 
                 }
             }
             post {
