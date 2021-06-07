@@ -38,19 +38,19 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Build And Unit Tests') {
             steps {
                 dir('simulator'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
                 }
                 dir('temperature'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
                 }
                 dir('luminosity'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
                 }
                 dir('humidity'){
-                    sh 'mvn -Dmaven.test.failure.ignore=true install' 
+                    sh 'mvn -Dmaven.test.failure.ignore=true clean install' 
                 }
             }
             post {
@@ -74,7 +74,7 @@ pipeline {
             steps {
                 script {
                     dir('temperature'){
-                        sh 'mvn verify -Dunit-tests.skip=true'
+                        sh 'mvn -Dunit-tests.skip=true test'
                     }
 
                 }
