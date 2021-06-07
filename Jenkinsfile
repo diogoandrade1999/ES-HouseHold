@@ -50,7 +50,13 @@ pipeline {
                     }
 
                 }
-                //cucumber buildStatus: null, fileIncludePattern: '**/cucumber.json', jsonReportDirectory: 'target', sortingMethod: 'ALPHABETICAL'
+            }
+            post {
+                success {
+                    dir('temperature'){
+                        cucumber buildStatus: null, fileIncludePattern: '**/cucumber.json', jsonReportDirectory: 'target', sortingMethod: 'ALPHABETICAL'
+                    }
+                }
             }
         }
         stage ('Deploy') {
