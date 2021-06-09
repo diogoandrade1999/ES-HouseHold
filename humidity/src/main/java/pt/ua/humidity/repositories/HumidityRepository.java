@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import pt.ua.humidity.entities.Humidity;
 
 @Repository
-public interface HumidityRepository extends JpaRepository<Humidity, Date> {
+public interface HumidityRepository extends JpaRepository<Humidity, Long> {
 
     Iterable<Humidity> findByDateBetween(Date startDate, Date endDate);
 

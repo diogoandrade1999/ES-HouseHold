@@ -3,16 +3,30 @@ package pt.ua.humidity.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@Table(name = "esp51_humidity")
 public class Humidity {
 
     @Id
+    @GeneratedValue
+    private long id;
+
+    @JsonProperty("date")
     private Date date;
 
+    @JsonProperty("humidity")
     private double humidity;
+
+    @JsonProperty("houseId")
     private long houseId;
+
+    @JsonProperty("roomId")
     private long roomId;
 
     public double getHumidity() {
@@ -49,12 +63,8 @@ public class Humidity {
 
     @Override
     public String toString() {
-        return "{" +
-            " date='" + getDate() + "'" +
-            ", humidity='" + getHumidity() + "'" +
-            ", houseId='" + getHouseId() + "'" +
-            ", roomId='" + getRoomId() + "'" +
-            "}";
+        return "{" + " date='" + getDate() + "'" + ", humidity='" + getHumidity() + "'" + ", houseId='" + getHouseId()
+                + "'" + ", roomId='" + getRoomId() + "'" + "}";
     }
 
 }

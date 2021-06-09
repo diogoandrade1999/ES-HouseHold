@@ -25,7 +25,7 @@ public class RestApisController {
     private String humidityUrl;
 
     @RequestMapping(value = "/{api}/{startDate}/{endDate}/{houseId}", method = RequestMethod.GET)
-    public Object getByHouseId(@PathVariable String api, @PathVariable long startDate, @PathVariable long endDate,
+    public Object[] getByHouse(@PathVariable String api, @PathVariable long startDate, @PathVariable long endDate,
             @PathVariable long houseId) {
         String apiUrl = "";
         if (api.equals("temperature"))
@@ -36,14 +36,37 @@ public class RestApisController {
             apiUrl = humidityUrl;
         else
             return null;
-        String uri = apiUrl + "/" + api + "/" + startDate + "/" + endDate;
+        String uri = apiUrl + "/" + api + "/" + startDate + "/" + endDate + "/" + houseId;
         RestTemplate restTemplate = new RestTemplate();
         if (api.equals("temperature"))
-            return (Temperature) restTemplate.getForObject(uri, Temperature.class);
+            return restTemplate.getForObject(uri, Temperature[].class);
         else if (api.equals("luminosity"))
-            return (Luminosity) restTemplate.getForObject(uri, Luminosity.class);
+            return restTemplate.getForObject(uri, Luminosity[].class);
         else if (api.equals("humidity"))
-            return (Humidity) restTemplate.getForObject(uri, Humidity.class);
+            return restTemplate.getForObject(uri, Humidity[].class);
+        return null;
+    }
+
+    @RequestMapping(value = "/{api}/{startDate}/{endDate}/{houseId}/{roomId}", method = RequestMethod.GET)
+    public Object[] getByHouseAdnRoom(@PathVariable String api, @PathVariable long startDate,
+            @PathVariable long endDate, @PathVariable long houseId, @PathVariable long roomId) {
+        String apiUrl = "";
+        if (api.equals("temperature"))
+            apiUrl = temperatureUrl;
+        else if (api.equals("luminosity"))
+            apiUrl = luminosityUrl;
+        else if (api.equals("humidity"))
+            apiUrl = humidityUrl;
+        else
+            return null;
+        String uri = apiUrl + "/" + api + "/" + startDate + "/" + endDate + "/" + houseId + "/" + roomId;
+        RestTemplate restTemplate = new RestTemplate();
+        if (api.equals("temperature"))
+            return restTemplate.getForObject(uri, Temperature[].class);
+        else if (api.equals("luminosity"))
+            return restTemplate.getForObject(uri, Luminosity[].class);
+        else if (api.equals("humidity"))
+            return restTemplate.getForObject(uri, Humidity[].class);
         return null;
     }
 

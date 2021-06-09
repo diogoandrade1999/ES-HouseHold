@@ -23,3 +23,14 @@ const capitalize = (s) => {
     if (typeof s !== "string") return "";
     return s.charAt(0).toUpperCase() + s.slice(1);
 };
+
+var color_codes = {};
+const stringToColorCode = (str) => {
+    return str in color_codes
+        ? color_codes[str]
+        : (color_codes[str] =
+              "#" +
+              ("000000" + ((Math.random() * 0xffffff) << 0).toString(16)).slice(
+                  -6
+              ));
+};

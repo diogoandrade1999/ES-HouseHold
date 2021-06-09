@@ -1,30 +1,25 @@
-package pt.ua.simulator.entities;
+package pt.ua.household.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class Simulator {
 
-@Entity
-@Table(name = "esp51_simulator")
-public class Room {
-
-    @Id
-    @Column(name = "room_id")
-    private long id;
-
+    private long roomId;
     private long houseId;
 
     private double temperature;
     private double humidity;
     private int light;
 
+    public Simulator(long roomId, long houseId) {
+        this.roomId = roomId;
+        this.houseId = houseId;
+    }
+
     public long getRoomId() {
-        return this.id;
+        return this.roomId;
     }
 
     public void setRoomId(long roomId) {
-        this.id = roomId;
+        this.roomId = roomId;
     }
 
     public long getHouseId() {

@@ -33,12 +33,4 @@ public class MainController {
         return "pages/index";
     }
 
-    @RequestMapping(value = "dashboard", method = RequestMethod.GET)
-    public String dashboard(Principal principal, Model model) {
-        User user = this.userService.getUserById(Long.parseLong(principal.getName().split("_")[0]));
-        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
-        model.addAttribute("login", true);
-        model.addAttribute("houses", user.getHouses());
-        return "pages/dashboard";
-    }
 }

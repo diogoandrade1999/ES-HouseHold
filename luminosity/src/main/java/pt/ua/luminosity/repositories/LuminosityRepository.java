@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import pt.ua.luminosity.entities.Luminosity;
 
 @Repository
-public interface LuminosityRepository extends JpaRepository<Luminosity, Date> {
+public interface LuminosityRepository extends JpaRepository<Luminosity, Long> {
 
     Iterable<Luminosity> findByDateBetween(Date startDate, Date endDate);
 

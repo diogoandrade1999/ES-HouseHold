@@ -17,4 +17,5 @@ public class TemperatureListener {
     public void temperatureListener(Temperature temperature) {
         this.temperatureService.saveTemperature(temperature);
     }
+
 }

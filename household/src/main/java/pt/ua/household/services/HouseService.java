@@ -8,4 +8,6 @@ public interface HouseService {
 
     House saveHouse(House house);
 
+    void removeHouse(House house);
+
 }

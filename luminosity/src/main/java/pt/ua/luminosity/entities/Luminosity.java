@@ -3,16 +3,30 @@ package pt.ua.luminosity.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@Table(name = "esp51_luminosity")
 public class Luminosity {
 
     @Id
+    @GeneratedValue
+    private long id;
+
+    @JsonProperty("date")
     private Date date;
 
+    @JsonProperty("luminosity")
     private double luminosity;
+
+    @JsonProperty("houseId")
     private long houseId;
+
+    @JsonProperty("roomId")
     private long roomId;
 
     public double getLuminosity() {

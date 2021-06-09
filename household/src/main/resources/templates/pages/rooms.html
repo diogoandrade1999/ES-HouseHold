@@ -10,53 +10,57 @@
             <!--/*/ <th:block th:include="common/nav :: html"></th:block> /*/-->
         </header>
         <main class="container">
-            <p class="h1 text-center mt-5">My Houses</p>
-            <div th:if="${not #lists.isEmpty(houses)}" class="mt-3">
+            <p
+                class="h1 text-center mt-5"
+                th:text="'Rooms House ' + ${house.getHouseId()}"
+            ></p>
+            <div class="mt-1">
+                <a
+                    th:href="@{/houses}"
+                    class="btn btn-outline-danger"
+                    aria-current="true"
+                    >Return</a
+                >
+            </div>
+            <div th:if="${not #lists.isEmpty(house.getRooms())}" class="mt-3">
                 <table class="table table-borderless w-100">
                     <tbody>
-                        <tr th:each="house: ${houses}">
+                        <tr th:each="room: ${house.getRooms()}">
                             <td>
                                 <p
                                     class="btn btn-light w-100"
-                                    th:text="'House Id: ' + ${house.getHouseId()}"
+                                    th:text="'Room Id: ' + ${room.getRoomId()}"
                                 ></p>
                             </td>
                             <td>
                                 <a
-                                    th:href="@{'/houses/dashboard/' + ${house.getHouseId()}}"
+                                    th:href="@{'/houses/dashboard/' + ${house.getHouseId()} + '/' + ${room.getRoomId()}}"
                                     class="btn btn-primary w-100"
                                     >Dashboard</a
                                 >
                             </td>
                             <td>
                                 <a
-                                    th:href="@{'/houses/rooms/' + ${house.getHouseId()}}"
-                                    class="btn btn-primary w-100"
-                                    >Rooms</a
-                                >
-                            </td>
-                            <td>
-                                <a
-                                    th:href="@{'/houses/remove/' + ${house.getHouseId()}}"
+                                    th:href="@{'/houses/room/remove/' + ${house.getHouseId()} + '/' + ${room.getRoomId()}}"
                                     class="btn btn-danger w-100"
-                                    >Remove House</a
+                                    >Remove Room</a
                                 >
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div th:if="${#lists.isEmpty(houses)}" class="mt-3">
+            <div th:if="${#lists.isEmpty(house.getRooms())}" class="mt-3">
                 <div class="alert alert-info text-center" role="alert">
-                    Not Houses Founded For This User!
+                    Not Rooms Founded For This House!
                 </div>
             </div>
             <div class="mt-3">
                 <a
-                    th:href="@{/houses/new}"
-                    class="btn btn-success w-25"
+                    th:href="@{'/houses/room/new/' + ${house.getHouseId()}}"
+                    class="btn btn-outline-success w-25"
                     aria-current="true"
-                    >Add New House</a
+                    >Add New Room</a
                 >
             </div>
         </main>

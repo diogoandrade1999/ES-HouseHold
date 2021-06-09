@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import ua.pt.temperature.entities.Temperature;
 
 @Repository
-public interface TemperatureRepository extends JpaRepository<Temperature, Date> {
+public interface TemperatureRepository extends JpaRepository<Temperature, Long> {
 
     Iterable<Temperature> findByDateBetween(Date startDate, Date endDate);
 

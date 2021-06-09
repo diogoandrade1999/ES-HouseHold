@@ -3,14 +3,6 @@ const line_chart = (labelName) => {
         labels: [],
         datasets: [
             {
-                label: labelName,
-                backgroundColor: "rgb(255, 99, 132)",
-                borderColor: "rgb(255, 99, 132)",
-                borderWidth: 2,
-                radius: 0,
-                data: [],
-            },
-            {
                 label: "Lower Threshold",
                 backgroundColor: "rgb(0, 191, 255)",
                 borderColor: "rgb(0, 191, 255)",
@@ -43,7 +35,7 @@ const line_chart = (labelName) => {
                 },
                 title: {
                     display: true,
-                    text: labelName + " House",
+                    text: labelName,
                     size: 30,
                 },
             },

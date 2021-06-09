@@ -10,6 +10,18 @@
             <!--/*/ <th:block th:include="common/nav :: html"></th:block> /*/-->
         </header>
         <main class="container">
+            <p
+                class="h1 text-center mt-5"
+                th:text="${room == null} ? 'Dashboard House ' + ${house.getHouseId()} : 'Dashboard House ' + ${house.getHouseId()} + ' Room ' + ${room.getRoomId()}"
+            ></p>
+            <div class="mt-1">
+                <a
+                    th:href="${room == null} ? @{/houses} : @{'/houses/rooms/' + ${house.getHouseId()}}"
+                    class="btn btn-outline-danger"
+                    aria-current="true"
+                    >Return</a
+                >
+            </div>
             <div class="row g-3 mt-5">
                 <div class="col-md-12 col-lg-6">
                     <div
@@ -60,7 +72,8 @@
                 </div>
             </div>
         </main>
-
+        <input type="hidden" id="houseId" th:value="${house.getHouseId()}"/>
+        <input type="hidden" id="roomId" th:value="${room != null} ? ${room.getRoomId()} : ''"/>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script
             src="../static/js/chart_line.js"

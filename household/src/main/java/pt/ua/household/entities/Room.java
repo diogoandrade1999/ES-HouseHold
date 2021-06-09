@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "rooms")
+@Table(name = "esp51_rooms")
 public class Room {
 
     @Id
@@ -63,8 +63,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return "{" + " id='" + getRoomId() + "'" + ", house='" + getHouse() + "'" + ", temperature='" + getTemperature()
-                + "'" + ", humidity='" + getHumidity() + "'" + ", light='" + getLight() + "'" + "}";
+        return "{" + " id='" + getRoomId() + "'" + ", temperature='" + getTemperature() + "'" + ", humidity='"
+                + getHumidity() + "'" + ", light='" + getLight() + "'" + "}";
     }
 
 }

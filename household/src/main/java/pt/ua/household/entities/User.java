@@ -1,5 +1,6 @@
 package pt.ua.household.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "esp51_users")
 public class User {
 
     @Id
@@ -30,7 +31,7 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "users_houses", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "house_id"))
-    private Set<House> houses;
+    private Set<House> houses = new HashSet<>();
 
     public Long getUserId() {
         return this.id;
@@ -92,12 +93,19 @@ public class User {
         this.houses = houses;
     }
 
+    public void addHouse(House house) {
+        this.houses.add(house);
+    }
+
+    public void removeHouse(House house) {
+        this.houses.remove(house);
+    }
+
     @Override
     public String toString() {
         return "{" + " id='" + getUserId() + "'" + ", password='" + getPassword() + "'" + ", firstName='"
                 + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", email='" + getEmail() + "'"
-                + ", contact='" + getContact() + "'" + ", address='" + getAddress() + "'" + ", houses='" + getHouses()
-                + "'" + "}";
+                + ", contact='" + getContact() + "'" + ", address='" + getAddress() + "'" + "}";
     }
 
 }

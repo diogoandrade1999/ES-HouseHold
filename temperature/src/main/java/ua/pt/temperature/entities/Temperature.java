@@ -5,12 +5,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "esp51_temperature")
 public class Temperature {
 
     @Id
+    @GeneratedValue
+    private long id;
+
     @JsonProperty("date")
     private Date date;
 

@@ -12,6 +12,9 @@ pipeline {
     stages {
         stage('Build And Unit Tests') {
             steps {
+                dir('household'){
+                    sh 'mvn -Dmaven.test.failure.ignore=true -Dintegration-tests.skip=true clean install' 
+                }
                 dir('simulator'){
                     sh 'mvn -Dmaven.test.failure.ignore=true -Dintegration-tests.skip=true clean install' 
                 }
@@ -27,6 +30,9 @@ pipeline {
             }
             post {
                 success {
+                    dir('household'){
+                        junit 'target/surefire-reports/**/*.xml' 
+                    }
                     dir('simulator'){
                         junit 'target/surefire-reports/**/*.xml' 
                     }
@@ -48,7 +54,6 @@ pipeline {
                     dir('temperature'){
                         sh 'mvn -Dunit-tests.skip=true verify'
                     }
-
                 }
             }
             post {
@@ -61,6 +66,7 @@ pipeline {
         }
         stage ('Deploy') {
             steps{
+                sh 'mvn deploy -DskipTests -f ./household/pom.xml -s settings.xml' 
                 sh 'mvn deploy -DskipTests -f ./simulator/pom.xml -s settings.xml' 
                 sh 'mvn deploy -DskipTests -f ./temperature/pom.xml -s settings.xml' 
                 sh 'mvn deploy -DskipTests -f ./luminosity/pom.xml -s settings.xml' 
@@ -71,6 +77,9 @@ pipeline {
             steps{
                 script{
                     docker.withRegistry("http://192.168.160.48:5000") {
+                        def householdApp = docker.build("esp51/household", "./household")
+                        householdApp.push()
+
                         def simulatorApp = docker.build("esp51/simulator", "./simulator")
                         simulatorApp.push()
 
@@ -123,6 +132,13 @@ pipeline {
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/humidity"
                     sshCommand remote: remote, command: "docker create -p 51030:51030 --name esp51-humidity 192.168.160.48:5000/esp51/humidity"
                     sshCommand remote: remote, command: "docker start esp51-humidity"
+
+                    sshCommand remote: remote, command: "docker stop esp51-household || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rm esp51-household || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/household || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/household"
+                    sshCommand remote: remote, command: "docker create -p 51010:51010 --name esp51-household 192.168.160.48:5000/esp51/household"
+                    sshCommand remote: remote, command: "docker start esp51-household"
                 }
             }
         }

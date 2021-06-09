@@ -22,4 +22,9 @@ public class HouseServiceImpl implements HouseService {
         return this.houseRepository.save(house);
     }
 
+    @Override
+    public void removeHouse(House house) {
+        this.houseRepository.delete(house);
+    }
+
 }

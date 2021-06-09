@@ -11,9 +11,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+
+import pt.ua.household.entities.Room;
 import pt.ua.household.model.Humidity;
 import pt.ua.household.model.Luminosity;
 import pt.ua.household.model.Temperature;
+import pt.ua.household.repositories.RoomRepository;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -27,6 +30,9 @@ public class ServiceSensorReceiverImpl {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    @Autowired
+    private RoomRepository roomRepository;
+
     private static Logger logger = LogManager.getLogger(ServiceSensorReceiverImpl.class);
 
     public void sendCommand(String message) {
@@ -36,20 +42,23 @@ public class ServiceSensorReceiverImpl {
     }
 
     @Scheduled(fixedRate = 5000)
-    public void getStates(){
-        long houseId = 1;
-        long roomId = 1;
+    public void getStates() {
+        for (Room room : roomRepository.findAll()) {
+            long roomId = room.getRoomId();
+            long houseId = room.getHouse().getHouseId();
+            Temperature temperature = resolveTemperatureState(houseId, roomId);
+            if (temperature != null)
+                logger.info("Temperature Received in API -> " + temperature.getTemperature());
 
-        Temperature temperature = resolveTemperatureState(houseId, roomId);
-        logger.info("Temperature Received in API -> " + temperature.getTemperature());
+            Humidity humidity = resolveHumidityState(houseId, roomId);
+            if (humidity != null)
+                logger.info("Humidity Received in API -> " + humidity.getHumidity());
 
-        Humidity humidity = resolveHumidityState(houseId, roomId);
-        logger.info("Humidity Received in API -> " + humidity.getHumidity());
-
-        Luminosity luminosity = resolveLightState(houseId, roomId);
-        logger.info("Luminosity Received in API -> " + luminosity.getLight());
+            Luminosity luminosity = resolveLightState(houseId, roomId);
+            if (luminosity != null)
+                logger.info("Luminosity Received in API -> " + luminosity.getLight());
+        }
     }
-
 
     public Temperature resolveTemperatureState(long houseId, long roomId) {
         RestTemplate restTemplate = new RestTemplate();
@@ -58,7 +67,6 @@ public class ServiceSensorReceiverImpl {
                 Temperature.class);
         Temperature temperature = response.getBody();
         return temperature;
-
 
     }
 
@@ -70,7 +78,6 @@ public class ServiceSensorReceiverImpl {
         Humidity humidity = response.getBody();
         return humidity;
 
-
     }
 
     public Luminosity resolveLightState(long houseId, long roomId) {
@@ -80,7 +87,6 @@ public class ServiceSensorReceiverImpl {
                 Luminosity.class);
         Luminosity luminosity = response.getBody();
         return luminosity;
-
     }
 
 }

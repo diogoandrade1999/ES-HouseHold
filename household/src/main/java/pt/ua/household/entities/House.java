@@ -1,5 +1,6 @@
 package pt.ua.household.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "houses")
+@Table(name = "esp51_houses")
 public class House {
 
     @Id
@@ -20,10 +21,10 @@ public class House {
     private long id;
 
     @OneToMany(mappedBy = "house")
-    private Set<Room> rooms;
+    private Set<Room> rooms = new HashSet<>();
 
     @ManyToMany(mappedBy = "houses")
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
     public long getHouseId() {
         return this.id;
@@ -41,6 +42,10 @@ public class House {
         this.rooms.add(room);
     }
 
+    public void removeRoom(Room room) {
+        this.rooms.remove(room);
+    }
+
     public Set<User> getUsers() {
         return this.users;
     }
@@ -49,10 +54,13 @@ public class House {
         this.users = users;
     }
 
+    public void addUsers(User user) {
+        this.users.add(user);
+    }
+
     @Override
     public String toString() {
-        return "{" + " id='" + getHouseId() + "'" + ", rooms='" + getRooms() + "'" + ", users='" + getUsers() + "'"
-                + "}";
+        return "{" + " id='" + getHouseId() + "'" + "}";
     }
 
 }

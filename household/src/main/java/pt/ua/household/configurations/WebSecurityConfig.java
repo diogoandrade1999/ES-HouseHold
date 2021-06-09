@@ -3,6 +3,7 @@ package pt.ua.household.configurations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,9 +38,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/", "/user/register", "/webjars/**").permitAll()
             .anyRequest().authenticated()
             .and().exceptionHandling().accessDeniedPage("/user/logout")
-            .and().formLogin().loginPage("/user/login").permitAll()
+            .and().formLogin().loginPage("/user/login").defaultSuccessUrl("/houses", true).permitAll()
             .and().logout().logoutUrl("/user/logout").permitAll()
             .and().csrf().disable();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+      web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
     }
 
 }

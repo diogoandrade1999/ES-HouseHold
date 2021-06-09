@@ -46,7 +46,7 @@ public class TemperatureRepositoryTest {
     @Test
     public void givenTemperatureToAddShouldReturnAddedTemperature() {
         temperatureRepository.save(temperature);
-        Temperature fetchedTemperature = temperatureRepository.findById(temperature.getDate()).get();
+        Temperature fetchedTemperature = temperatureRepository.findById((long) 1).get();
         assertTrue(date.getTime() / 1000 == fetchedTemperature.getDate().getTime() / 1000);
     }
 
