@@ -137,7 +137,7 @@ pipeline {
                     sshCommand remote: remote, command: "docker rm esp51-household || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/household || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/household"
-                    sshCommand remote: remote, command: "docker create -p 51010:51010 --name esp51-household 192.168.160.48:5000/esp51/household"
+                    sshCommand remote: remote, command: "docker create -p 51000:51000 --name esp51-household 192.168.160.48:5000/esp51/household"
                     sshCommand remote: remote, command: "docker start esp51-household"
                 }
             }
