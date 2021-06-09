@@ -130,7 +130,7 @@ pipeline {
                     sshCommand remote: remote, command: "docker rm esp51-humidity || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker rmi 192.168.160.48:5000/esp51/humidity || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker pull 192.168.160.48:5000/esp51/humidity"
-                    sshCommand remote: remote, command: "docker create -p 51030:51030 --name esp51-humidity 192.168.160.48:5000/esp51/humidity"
+                    sshCommand remote: remote, command: "docker create -p 51040:51040 --name esp51-humidity 192.168.160.48:5000/esp51/humidity"
                     sshCommand remote: remote, command: "docker start esp51-humidity"
 
                     sshCommand remote: remote, command: "docker stop esp51-household || echo 'Do not have that image'"
