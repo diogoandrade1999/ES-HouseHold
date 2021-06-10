@@ -55,7 +55,7 @@ public class NotificationsService {
             if (temperature.getTemperature() >= 25.0) {
 
                 for (User user: r.getHouse().getUsers()){
-                    Alert alert = new Alert(user.getUserId(), "temperature", "Temperature above normal!");
+                    Alert alert = new Alert(user.getUserId(), r.getHouse().getHouseId(), r.getRoomId(),"temperature", "Temperature above normal!");
                     sendAlert(alert);
                 }
 
@@ -64,7 +64,7 @@ public class NotificationsService {
             else if (temperature.getTemperature() <= 15.0){
 
                 for (User user: r.getHouse().getUsers()){
-                    Alert alert = new Alert(user.getUserId(), "temperature", "Temperature below normal!");
+                    Alert alert = new Alert(user.getUserId(), r.getHouse().getHouseId(), r.getRoomId(), "temperature", "Temperature below normal!");
                     sendAlert(alert);
                 }
 
@@ -73,7 +73,7 @@ public class NotificationsService {
             if (humidity.getHumidity() >= 60){
 
                 for (User user: r.getHouse().getUsers()){
-                    Alert alert = new Alert(user.getUserId(), "humidity", "Humidity above normal!");
+                    Alert alert = new Alert(user.getUserId(), r.getHouse().getHouseId(), r.getRoomId(), "humidity", "Humidity above normal!");
                     sendAlert(alert);
                 }
 
@@ -82,7 +82,7 @@ public class NotificationsService {
             else if(humidity.getHumidity() <= 15){
 
                 for (User user: r.getHouse().getUsers()){
-                    Alert alert = new Alert(user.getUserId(), "humidity", "Humidity below normal!");
+                    Alert alert = new Alert(user.getUserId(), r.getHouse().getHouseId(), r.getRoomId(), "humidity", "Humidity below normal!");
                     sendAlert(alert);
                 }
 
@@ -91,7 +91,7 @@ public class NotificationsService {
             if (luminosity.getLight() >= 300){
 
                 for (User user: r.getHouse().getUsers()){
-                    Alert alert = new Alert(user.getUserId(), "luminosity", "Luminosity above normal!");
+                    Alert alert = new Alert(user.getUserId(), r.getHouse().getHouseId(), r.getRoomId(), "luminosity", "Luminosity above normal!");
                     sendAlert(alert);
                 }
             }
@@ -99,7 +99,7 @@ public class NotificationsService {
             else if (luminosity.getLight() <= 100){
 
                 for (User user: r.getHouse().getUsers()){
-                    Alert alert = new Alert(user.getUserId(), "luminosity", "Luminosity below normal!");
+                    Alert alert = new Alert(user.getUserId(), r.getHouse().getHouseId(), r.getRoomId(), "luminosity", "Luminosity below normal!");
                     sendAlert(alert);
                 }
 

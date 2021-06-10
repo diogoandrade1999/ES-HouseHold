@@ -1,6 +1,7 @@
 package pt.ua.household.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -10,10 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 import pt.ua.household.entities.House;
 import pt.ua.household.entities.Room;
 import pt.ua.household.entities.User;
+import pt.ua.household.model.Alert;
 import pt.ua.household.model.Simulator;
+import pt.ua.household.service.AlertService;
 import pt.ua.household.services.HouseService;
 import pt.ua.household.services.RoomService;
 import pt.ua.household.services.UserService;
@@ -37,6 +41,9 @@ public class HouseController {
 
     @Autowired
     private RoomService roomService;
+
+    @Autowired
+    private AlertService alertService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String houses(Principal principal, Model model) {
@@ -144,6 +151,17 @@ public class HouseController {
         this.sendRoom(new Simulator(room.getRoomId(), room.getHouse().getHouseId()), "esp51-room-delete");
         this.roomService.removeRoom(room);
         return "redirect:/houses/rooms/" + houseId;
+    }
+
+    @RequestMapping(value = "alerts/", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Alert> getAlertsByUserId(Principal principal){
+        User user = this.userService.getUserById(Long.parseLong(principal.getName().split("_")[0]));
+        List<Alert> alerts = alertService.getAlertsByUserId(user.getUserId());
+        for (Alert alert: alerts){
+            alertService.removeAlert(alert);
+        }
+        return alerts;
     }
 
 }

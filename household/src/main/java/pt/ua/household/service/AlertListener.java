@@ -11,11 +11,15 @@ import pt.ua.household.model.Alert;
 @Configuration
 public class AlertListener {
 
+    @Autowired
+    private AlertService alertService;
+
     private static Logger logger = LogManager.getLogger(AlertListener.class);
 
     @KafkaListener(topics = "esp51-alerts", groupId = "esp51", containerFactory = "alertKafkaListenerContainerFactory")
     public void alertListener(Alert alert) {
         logger.info("Received an alert for user -> " + alert.getUserId());
+        alertService.saveAlert(alert);
     }
 
 }

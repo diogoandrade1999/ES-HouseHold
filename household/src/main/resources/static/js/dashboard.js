@@ -36,6 +36,7 @@ $(document).ready(function () {
         getDataRestApi(15, 25, temperatureChart, "temperature");
         getDataRestApi(100, 300, luminosityChart, "luminosity");
         getDataRestApi(20, 60, humidityChart, "humidity");
+        getAlertsRestApi();
     }, 5000);
 
     const getDataRestApi = (
@@ -125,6 +126,21 @@ $(document).ready(function () {
             })
             .fail((err) => {
                 console.log("Fail request from Rest API!");
+            });
+    };
+
+    const getAlertsRestApi = (
+    ) => {
+    $.ajax({
+                url:"/houses/alerts/",
+                method: "GET",
+                dataType: "json",
+            })
+            .done((res) => {
+                console.log(res);
+            })
+            .fail((err) => {
+                console.log("Fail request from Alerts Rest API!");
             });
     };
 });
