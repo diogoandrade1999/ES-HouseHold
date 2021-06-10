@@ -2,10 +2,7 @@ package pt.ua.luminosity.entities;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Luminosity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     @JsonProperty("date")
