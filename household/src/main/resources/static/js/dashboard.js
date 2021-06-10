@@ -138,6 +138,11 @@ $(document).ready(function () {
             })
             .done((res) => {
                 console.log(res);
+                res.forEach(element => {
+                   $('.toast').toast('show');
+                   $('div.toast-body').text(JSON.stringify(res));
+                })
+
             })
             .fail((err) => {
                 console.log("Fail request from Alerts Rest API!");

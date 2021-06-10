@@ -4,11 +4,48 @@
         <title>Dashboard</title>
 
         <!--/*/ <th:block th:include="common/head :: head"></th:block> /*/-->
+        <meta charset="utf-8">
+
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href=
+                "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <script src=
+                        "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+        </script>
+
+        <script src=
+                        "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+        </script>
+
+        <script src=
+                        "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+        </script>
+
+        <style>
+        #notification {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .toast-color {
+            color: white;
+            background-color: #ff9800;
+        }
+
+    </style>
     </head>
+
     <body class="bg-dark text-white">
+
         <header>
             <!--/*/ <th:block th:include="common/nav :: html"></th:block> /*/-->
+
         </header>
+
         <main class="container">
             <p
                 class="h1 text-center mt-5"
@@ -72,6 +109,22 @@
                 </div>
             </div>
         </main>
+
+        <!-- Notification alerts -->
+        <div class="toast toast-color" id="notification">
+            <div class="toast-header toast-color">
+                <strong class="mr-auto">Alert!</strong>
+                <small>Just Now</small>
+
+                <button type="button" class="ml-2 mb-1 close"
+                        data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="toast-body">
+            </div>
+        </div>
         <input type="hidden" id="houseId" th:value="${house.getHouseId()}"/>
         <input type="hidden" id="roomId" th:value="${room != null} ? ${room.getRoomId()} : ''"/>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
