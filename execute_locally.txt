@@ -13,8 +13,8 @@ Steps - To execute locally, simulating the deployment environment:
    sudo docker build luminosity/ -t luminosity-app
 
    sudo docker run --network=host -w /household household
-   sudo docker run --network=host -w /simulator simulator-app
-   sudo docker run --network=host -w /temperature temperature-app
-   sudo docker run --network=host -w /humidity humidity-app
-   sudo docker run --network=host -w /luminosity luminosity-app
+   sudo docker run -d --network=host -w /simulator simulator-app
+   sudo docker run -d --network=host -w /temperature temperature-app
+   sudo docker run -d --network=host -w /humidity humidity-app
+   sudo docker run -d --network=host -w /luminosity luminosity-app
 
