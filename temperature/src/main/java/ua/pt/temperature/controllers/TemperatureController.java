@@ -2,6 +2,8 @@ package ua.pt.temperature.controllers;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,8 @@ import ua.pt.temperature.services.TemperatureService;
 @RestController
 @RequestMapping("/temperature")
 public class TemperatureController {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private TemperatureService temperatureService;
@@ -48,6 +52,7 @@ public class TemperatureController {
     // room in the household app side
     @RequestMapping(value = "/recent/{houseId}/{roomId}", method = RequestMethod.GET)
     public Temperature getRecentTemperature(@PathVariable long houseId, @PathVariable long roomId) {
+        this.logger.info("GET -> Recent Temperature from Room ID: %d", roomId);
         return this.temperatureService.getRecentTemperature(houseId, roomId);
     }
 
