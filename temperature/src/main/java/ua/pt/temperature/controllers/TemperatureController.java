@@ -52,7 +52,7 @@ public class TemperatureController {
     // room in the household app side
     @RequestMapping(value = "/recent/{houseId}/{roomId}", method = RequestMethod.GET)
     public Temperature getRecentTemperature(@PathVariable long houseId, @PathVariable long roomId) {
-        this.logger.info("GET -> Recent Temperature from Room ID: %d", roomId);
+        this.logger.info("GET -> Recent Temperature from Room ID: {}", roomId);
         return this.temperatureService.getRecentTemperature(houseId, roomId);
     }
 
