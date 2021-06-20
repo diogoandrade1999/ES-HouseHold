@@ -1,5 +1,5 @@
 FROM bitnami/logstash:latest
 
-COPY . ./logs
-ENV LOGSTASH_CONF_FILENAME=./logs/logstash.conf
+COPY . /opt/bitnami/logstash/config/
+ENV LOGSTASH_CONF_FILENAME=logstash.conf
 EXPOSE 51050
