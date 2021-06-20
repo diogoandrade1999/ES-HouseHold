@@ -140,7 +140,7 @@ $(document).ready(function () {
                 console.log(res);
                 res.forEach(element => {
                    $('.toast').toast('show');
-                   $('div.toast-body').text(JSON.stringify(res));
+                   $('div.toast-body').text("House " + element["houseId"] + " and Room "  + element["roomId"] + ": " + element["message"]);
                 })
 
             })
