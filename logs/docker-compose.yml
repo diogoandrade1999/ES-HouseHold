@@ -1,0 +1,6 @@
+version: "3"
+services:
+    logstash:
+        build: .
+        ports:
+            - "51050:51050"

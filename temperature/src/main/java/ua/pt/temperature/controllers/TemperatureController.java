@@ -32,7 +32,7 @@ public class TemperatureController {
     @RequestMapping(value = "/{startDate}/{endDate}/{houseId}", method = RequestMethod.GET)
     public Iterable<Temperature> betweenDatesAndHouse(@PathVariable long startDate, @PathVariable long endDate,
             @PathVariable long houseId) {
-        this.logger.info("GET -> Temperature from House ID: {}", houseId);
+        // this.logger.info("GET -> Temperature from House ID: {}", houseId);
         return this.temperatureService.getTemperatureByDateAndHouse(new Date(startDate * 1000L),
                 new Date(endDate * 1000L), houseId);
     }
@@ -40,14 +40,15 @@ public class TemperatureController {
     @RequestMapping(value = "/{startDate}/{endDate}/{houseId}/{roomId}", method = RequestMethod.GET)
     public Iterable<Temperature> betweenDatesAndHouseAndRoom(@PathVariable long startDate, @PathVariable long endDate,
             @PathVariable long houseId, @PathVariable long roomId) {
-        this.logger.info("GET -> Temperature from Room ID: {}", roomId);
+        // this.logger.info("GET -> Temperature from Room ID: {}", roomId);
         return this.temperatureService.getTemperatureByDateAndHouseAndRoom(new Date(startDate * 1000L),
                 new Date(endDate * 1000L), houseId, roomId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public Temperature save(@RequestBody Temperature temperature) {
-        this.logger.info("POST -> Save Temperature from Room ID: {}", temperature.getRoomId());
+        // this.logger.info("POST -> Save Temperature from Room ID: {}",
+        // temperature.getRoomId());
         return this.temperatureService.saveTemperature(temperature);
     }
 
@@ -56,12 +57,13 @@ public class TemperatureController {
     // room in the household app side
     @RequestMapping(value = "/recent/{houseId}/{roomId}", method = RequestMethod.GET)
     public Temperature getRecentTemperature(@PathVariable long houseId, @PathVariable long roomId) {
-        this.logger.info("GET -> Recent Temperature from Room ID: {}", roomId);
+        // this.logger.info("GET -> Recent Temperature from Room ID: {}", roomId);
         return this.temperatureService.getRecentTemperature(houseId, roomId);
     }
 
     @RequestMapping(value = "/version", method = RequestMethod.GET)
     public String getVersion() {
+        this.logger.info("GET -> Version: 1.0");
         return "1.0";
     }
 
