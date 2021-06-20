@@ -33,6 +33,9 @@ pipeline {
                     dir('household'){
                         junit 'target/surefire-reports/**/*.xml' 
                     }
+                    dir('simulator'){
+                        junit 'target/surefire-reports/**/*.xml' 
+                    }
                     dir('temperature'){
                         junit 'target/surefire-reports/**/*.xml' 
                     }
