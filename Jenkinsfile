@@ -106,9 +106,9 @@ pipeline {
                     }
 
                     sshPut(from: './logstash.conf', remote: remote, into: '/home/esp51')
-                    sshCommand remote: remote, command: "docker stop esp50-logstash || echo 'Do not have that image'"
-                    sshCommand remote: remote, command: "docker rm esp50-logstash || echo 'Do not have that image'"
-                    sshCommand remote: remote, command: "docker run --name esp50-logstash -d -p 51050:51050 --env LOGSTASH_CONF_FILENAME=logstash.conf -v /home/esp51:/bitnami/logstash/config bitnami/logstash:latest"
+                    sshCommand remote: remote, command: "docker stop esp51-logstash || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker rm esp51-logstash || echo 'Do not have that image'"
+                    sshCommand remote: remote, command: "docker run --name esp51-logstash -d -p 51050:51050 --env LOGSTASH_CONF_FILENAME=logstash.conf -v /home/esp51:/bitnami/logstash/config bitnami/logstash:latest"
 
                     sshCommand remote: remote, command: "docker stop esp51-simulator || echo 'Do not have that image'"
                     sshCommand remote: remote, command: "docker rm esp51-simulator || echo 'Do not have that image'"
